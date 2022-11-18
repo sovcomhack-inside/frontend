@@ -27,7 +27,6 @@ const DENIED_PATH_GROUPS = [
 ]
 
 module.exports = {
-  parser: '@typescript-eslint/parser',
   env: {
     browser: true,
     es2021: true,
@@ -70,6 +69,7 @@ module.exports = {
         ],
       },
     ],
+    'import/no-unresolved': 'off',
     'no-restricted-imports': [
       2,
       {

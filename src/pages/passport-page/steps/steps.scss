@@ -1,0 +1,56 @@
+.StartStep {
+  display: grid;
+  align-content: flex-end;
+  row-gap: 30px;
+  margin-top: 100%;
+
+  span {
+    text-align: center;
+  }
+}
+
+.ManualStep,
+.PhoneStep {
+  input {
+    padding-left: 15px;
+    width: 100%;
+    color: #fff;
+  }
+}
+
+.ManualStep {
+  width: 251px;
+  margin: 0 auto;
+  margin-top: 70px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 25px;
+
+  .doneButton {
+    margin-top: 90px;
+  }
+
+  .dataPolicy {
+    text-align: center;
+    font-size: 8px;
+  }
+}
+
+.PhoneStep {
+  margin-top: 77px;
+  display: flex;
+  flex-direction: column;
+  button {
+    width: 100%;
+    margin-top: 100%;
+  }
+}
+
+.inputTitle {
+  display: block;
+  padding-bottom: 5px;
+  padding-left: 30px;
+  color: rgba(255, 255, 255, 0.4);
+}

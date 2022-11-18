@@ -1,0 +1,23 @@
+.title {
+  text-align: center;
+  font-size: 36px;
+  .subTitle {
+    font-size: 24px;
+    color: #ffffff80;
+  }
+}
+
+.backBtn {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,36 @@
+import React, { useRef, useState } from 'react'
+import { MoniTitle, WhiteButton, WithFormPage, WithTitleInput } from 'shared/ui'
+import { WithSetStep } from '../types'
+import styles from './steps.scss'
+
+export const PhoneStep: React.FC<WithSetStep> = (props) => {
+  const [value, setValue] = useState('') //TODO: To mst store
+
+  const getForm = () => {
+    return (
+      <div className={styles.PhoneStep}>
+        <WithTitleInput
+          title={<span className={styles.inputTitle}>Номер телефона</span>}
+          placeholder={'+'}
+          onChange={({ currentTarget: { value } }) => setValue(value)}
+        />
+        <WhiteButton
+          disabled={value.length !== 12}
+          value="Подписать"
+          onClick={props.nextStep}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <WithFormPage
+      showBackButton
+      onBackButtonClick={props.prevStep}
+      containerStyle={{ width: 251 }}
+      title={<MoniTitle />}
+      subTitle="Последний шаг."
+      form={getForm()}
+    />
+  )
+}

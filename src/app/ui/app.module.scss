@@ -1,0 +1,49 @@
+$white: #fff;
+$blue: #6372fb;
+
+@font-face {
+  font-family: 'Averta';
+  src: url('./fonts/AvertaCY-Regular.ttf') format('truetype');
+}
+
+* {
+  font-family: 'Averta' !important;
+}
+
+body {
+  background: #121212;
+  font-size: 14px;
+  color: #fff;
+}
+
+.markedText {
+  color: $blue;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: 42.26px;
+}
+h2 {
+  font-size: 24px;
+}
+h3 {
+  font-size: 16px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  margin: 0 auto;
+  max-width: 300px;
+  width: 300px;
+
+  color: $white;
+}

@@ -1,0 +1,50 @@
+.Button {
+  padding: 14px 13px 13px 13px;
+  text-align: center;
+  border-radius: 3px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+  transition: all 0.07s;
+
+  svg,
+  path {
+    fill: inherit !important;
+    margin: 0px 5px;
+  }
+}
+
+.Button.blue {
+  background: #6372fb !important;
+  color: #fff !important;
+
+  &:hover {
+    background: #6372fb70;
+  }
+
+  &:disabled {
+    background: #6372fb30;
+  }
+}
+
+.Button.white {
+  background: #ffffff;
+  color: #000;
+
+  &:hover {
+    background: #ffffff70;
+  }
+
+  &:disabled {
+    background: #ffffff30;
+  }
+}
+
+.Button.wide {
+}
+
+.Button.square {
+  width: 40px;
+  height: 40px;
+}

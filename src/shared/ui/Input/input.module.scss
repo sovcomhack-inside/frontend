@@ -1,0 +1,42 @@
+.Input {
+  font-family: 'Averta';
+  background: #151515;
+  padding: 16px 0 15px 7px;
+  width: max-content;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+input:-internal-autofill-selected {
+  -webkit-box-shadow: 0 0 0 50px #151515 inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-radius: 0px;
+}
+
+.WithIconInput {
+  display: flex;
+  align-items: center;
+  padding-right: 0;
+  background: #151515;
+  width: 250px;
+  height: max-content;
+
+  .Icon {
+    padding-left: 20px;
+    width: 30px;
+  }
+  .Input {
+    padding-left: 15px;
+    outline: none;
+  }
+}
+
+.WithTitleInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

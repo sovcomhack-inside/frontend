@@ -1,17 +1,21 @@
 import classNames from 'classnames'
-import React from 'react'
-import 'style.css'
-
-interface ButtonProps {
-  color: string
-  value: string
-  className: string
-  onClick: () => void
+import React, { ReactNode } from 'react'
+import styles from './styles.module.scss'
+export interface ButtonProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'value'> {
+  type?: 'wide' | 'square'
+  value?: string | React.ReactNode
+  icon?: React.ReactNode
 }
 
+export { BlueButton } from './BlueButton'
+
 export const Button: React.FC<Partial<ButtonProps>> = (props) => {
-  const { className, value } = props
+  const { className, type = 'wide', value, icon, ...rest } = props
   return (
-    <button className={classNames('Button', className)}>{props.value}</button>
+    <button className={classNames(styles.Button, className)} {...rest}>
+      {icon}
+      {value}
+    </button>
   )
 }

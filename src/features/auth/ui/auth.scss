@@ -1,0 +1,19 @@
+.LoginForm {
+  button {
+    align-self: end;
+  }
+}
+
+.SignupForm {
+  .policy {
+    font-size: 8px;
+    text-align: center;
+  }
+  .inputs {
+    display: grid;
+    gap: 10px;
+  }
+  .button {
+    padding: 14px 45px;
+  }
+}

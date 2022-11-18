@@ -1,0 +1,23 @@
+.DonePage {
+  width: 251px;
+  margin: 0 auto;
+  margin-top: 50%;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  grid-template-rows: 1fr max-content max-content 1fr;
+
+  .mainText,
+  .secondaryText {
+    text-align: center;
+    font-size: 24px;
+  }
+  .mainText {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  .doneButton {
+    width: 100%;
+  }
+}
