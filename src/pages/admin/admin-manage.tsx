@@ -1,8 +1,10 @@
 import { User } from 'features/auth/api/types'
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { useAsyncValue } from 'react-router-dom'
 import { fetchAPI, withQuery } from 'shared/api/network'
 import { UserModel } from 'shared/model'
+import { Input, WhiteButton } from 'shared/ui'
+import { Button } from 'shared/ui/Button/style.module.scss'
 import '../../index.css'
 
 interface LoginFormProps extends React.HTMLProps<HTMLDivElement> {
@@ -14,7 +16,7 @@ export const AdminManagePage: React.FC = (props) => {
 
   React.useEffect(() => {
     const data = { status: "pending_approve" };
-    fetchAPI.get<any>(withQuery("/api/v1/admin/list_users", data)).then((response) => {
+    fetchAPI.post<any>("/api/v1/admin/list_users", data).then((response) => {
       setUnapprovedUsers(response.users as User[]);
     })
   }, [])
@@ -31,10 +33,30 @@ export const AdminManagePage: React.FC = (props) => {
     </div>
   }
 
-  return <div>
+  const banUser = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const response = await fetchAPI.post<any>("/api/v1/admin/list_users", { email_in: [e.currentTarget.email.value] });
+    fetchAPI.post("/api/v1/admin/update_user_status", { id: response.users[0].id, status: "banned" })
+  }
+
+  return <div className='flex flex-col gap-4'>
     <div className='flex flex-col mt-8 mx-auto place-items-center h-full gap-2'>
       <div>Users Pending Approve</div>
       {unapprovedUsers?.map(mapUser)}
+    </div>
+    <div>
+      <form className='flex flex-col gap-2 place-items-center' onSubmit={banUser}>
+        <div>
+          <Input type="email"
+            name="email"
+            placeholder="email"
+          />
+        </div>
+        <WhiteButton
+          type="wide"
+          value="Заблокировать"
+        />
+      </form>
     </div>
   </div>
 }
