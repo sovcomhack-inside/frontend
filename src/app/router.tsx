@@ -1,7 +1,8 @@
 import { LandingPage } from 'pages/landing-page'
 import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'
-import { PassportPage } from 'pages/passport-page'
+import { WithMenuComponent } from './ui/WithMenuComponent'
+import { ProfilePage } from 'pages'
 
 export const router = createBrowserRouter([
   {
@@ -21,11 +22,11 @@ export const router = createBrowserRouter([
     element: <SignupPage />,
   },
   {
-    path: '/passport',
-    element: <PassportPage />,
-  },
-  {
     path: '/profile',
-    element: <>Proflet</>,
+    element: (
+      <WithMenuComponent>
+        <ProfilePage />
+      </WithMenuComponent>
+    ),
   },
 ])

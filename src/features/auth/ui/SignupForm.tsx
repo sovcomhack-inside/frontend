@@ -5,7 +5,6 @@ import { BlueButton } from 'shared/ui/Button'
 import { LetterIcon, LockIcon, UserIcon } from 'shared/ui/Icons'
 import { WithIconInput } from 'shared/ui'
 import styles from './auth.scss'
-import { signupUser } from 'features/auth/api/signupUser'
 
 interface SignupFormProps extends React.HTMLProps<HTMLDivElement> {
   onButtonClick?: () => void
@@ -23,12 +22,17 @@ export const SignupForm: React.FC<SignupFormProps> = (props) => {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
     }
-    signupUser(data).then((response) => console.log(response));
+    // AuthApi.signUp(data)
+    console.log(data)
+    props.onButtonClick?.()
   }
 
   return (
-    <div className={classNames(className, styles.SignupForm)} {...rest}>
-      <form onSubmit={onSubmit}>
+    <div {...rest}>
+      <form
+        onSubmit={onSubmit}
+        className={classNames(className, styles.SignupForm)}
+      >
         <div className={styles.inputs}>
           <WithIconInput
             icon={<UserIcon />}

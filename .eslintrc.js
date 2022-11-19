@@ -70,6 +70,7 @@ module.exports = {
       },
     ],
     'import/no-unresolved': 'off',
+    'react/react-in-jsx-scope': 'off',
     'no-restricted-imports': [
       2,
       {
