@@ -8,9 +8,6 @@ import s from './user-bank-acount-info.scss'
 export const UserBankAccountInfo = () => {
   return (
     <div className={s.UserBankAccountInfo}>
-      <span className={s.currency}>
-        Ваш счет в <span className={appCss.markedText}>рублях</span>
-      </span>
       <span className={s.totalAmount}>15 455 ₽</span>
       <div className={s.allTime}>
         <span className={s.absolute}>77 324 ₽ &nbsp;</span>(
@@ -23,6 +20,9 @@ export const UserBankAccountInfo = () => {
           +37%
         </span>
         )<span className={appCss.markedText}>&nbsp;всё время</span>
+      </div>
+      <div className={s.mode}>
+        <div className={s.modeItem}>$</div>
       </div>
     </div>
   )

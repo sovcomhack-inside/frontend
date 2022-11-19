@@ -54,6 +54,7 @@
     "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.4.3",
+    "recharts": "^2.1.16",
     "resolve": "^1.22.1",
     "resolve-url-loader": "^5.0.0",
     "semver": "^7.3.8",
@@ -113,7 +114,7 @@
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupFilesAfterEnv": [ ],
+    "setupFilesAfterEnv": [],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
@@ -128,7 +129,7 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"
     ],
-    "modulePaths": [ ],
+    "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"

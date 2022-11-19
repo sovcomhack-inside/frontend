@@ -1,4 +1,6 @@
 import { appCss } from 'app'
+import { AuthModel } from 'features/auth/model'
+import { observer } from 'mobx-react-lite'
 import { WithSetStep } from 'pages/passport-page/types'
 import {
   BlueButton,
@@ -10,23 +12,53 @@ import {
 import styles from './steps.scss'
 
 const titles = [
-  'ФИО',
-  'Серия и номер',
-  'Когда выдан',
-  'Кем выдан',
-  'Код подразделения',
+  'ФИО /// fullName',
+  'Серия и номер /// seriaAndNumber',
+  'Когда выдан /// date',
+  'Кем выдан /// givenBy',
+  'Код подразделения /// code',
 ]
 
-export const ManualStep: React.FC<WithSetStep> = (props) => {
+export const ManualStep: React.FC<WithSetStep> = observer((props) => {
   const getForm = () => {
     return (
       <div className={styles.ManualStep}>
         <BlueButton value="Фото паспорта" />
-        {titles.map((title) => (
-          <WithTitleInput
-            title={<span className={styles.inputTitle}>{title}</span>}
-          />
-        ))}
+        <WithTitleInput
+          value={AuthModel.passport?.fullName}
+          onChange={({ currentTarget: { value } }) =>
+            AuthModel.passport?.setName(value)
+          }
+          title={<span className={styles.inputTitle}>ФИО</span>}
+        />
+        <WithTitleInput
+          value={AuthModel.passport?.seriaAndNumber}
+          onChange={({ currentTarget: { value } }) =>
+            AuthModel.passport?.setSeriaAndNumber(value)
+          }
+          title={<span className={styles.inputTitle}>Серия и номер</span>}
+        />
+        <WithTitleInput
+          value={AuthModel.passport?.date}
+          onChange={({ currentTarget: { value } }) =>
+            AuthModel.passport?.setDate(value)
+          }
+          title={<span className={styles.inputTitle}>Когда выдан</span>}
+        />
+        <WithTitleInput
+          value={AuthModel.passport?.givenBy}
+          onChange={({ currentTarget: { value } }) =>
+            AuthModel.passport?.setGivenBy(value)
+          }
+          title={<span className={styles.inputTitle}>Кем выдан</span>}
+        />
+        <WithTitleInput
+          value={AuthModel.passport?.code}
+          onChange={({ currentTarget: { value } }) =>
+            AuthModel.passport?.setCode(value)
+          }
+          title={<span className={styles.inputTitle}>Код подразделения</span>}
+        />
         <WhiteButton
           value="Готово"
           className={styles.doneButton}
@@ -50,4 +82,4 @@ export const ManualStep: React.FC<WithSetStep> = (props) => {
       form={getForm()}
     />
   )
-}
+})

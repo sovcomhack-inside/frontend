@@ -2,20 +2,22 @@ import React, { useState } from 'react'
 import { MoniTitle, WhiteButton, WithFormPage, WithTitleInput } from 'shared/ui'
 import { WithSetStep } from 'pages/passport-page/types'
 import styles from './steps.scss'
+import { AuthModel } from 'features/auth/model'
+import { observer } from 'mobx-react-lite'
 
-export const PhoneStep: React.FC<WithSetStep> = (props) => {
-  const [value, setValue] = useState('') //TODO: To mst store
-
+export const PhoneStep: React.FC<WithSetStep> = observer((props) => {
   const getForm = () => {
     return (
       <div className={styles.PhoneStep}>
         <WithTitleInput
           title={<span className={styles.inputTitle}>Номер телефона</span>}
           placeholder={'+'}
-          onChange={({ currentTarget: { value } }) => setValue(value)}
+          value={AuthModel.phoneWithPlus}
+          type="phone"
+          onChange={({ currentTarget: { value } }) => AuthModel.setPhone(value)}
         />
         <WhiteButton
-          disabled={value.length !== 12}
+          disabled={AuthModel.phone.length !== 11}
           value="Подписать"
           onClick={props.nextStep}
         />
@@ -33,4 +35,4 @@ export const PhoneStep: React.FC<WithSetStep> = (props) => {
       form={getForm()}
     />
   )
-}
+})

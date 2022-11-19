@@ -107,7 +107,7 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-      <Link to={{ pathname: '/login' }}>
+      <Link to={{ pathname: '/new' }}>
         <WhiteButton
           value={
             <>
@@ -115,7 +115,6 @@ export const LandingPage = () => {
             </>
           }
           type="wide"
-          onClick={() => nav('/new')}
           className={classNames(styles.button, styles.friendButton)}
         />
       </Link>

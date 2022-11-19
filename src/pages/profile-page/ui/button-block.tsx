@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 import { AddIcon, PieChartIcon } from 'shared/ui'
+import { PageIcon } from 'shared/ui/Icons/PageIcon'
 import s from './buttons-block.scss'
 export const ButtonsBlock = () => {
   return (
@@ -17,6 +18,13 @@ export const ButtonsBlock = () => {
         <span className={s.title}>Больше о долларе</span>
         <span className={s.subTitle}>История, новости</span>
         <span className={s.dollarIcon}>$</span>
+      </div>
+      <div className={classNames(s.item, s.reqs)}>
+        <span className={s.title}>Реквизиты счета</span>
+        <span className={s.subTitle}>Данные счета</span>
+        <span className={s.pageIcon}>
+          <PageIcon />
+        </span>
       </div>
     </div>
   )

@@ -9,6 +9,8 @@ export const httpStatus = {
   InternalServerError: 500,
 }
 
+export const BASE_URL = 'http://127.0.0.1:8080/api/v1'
+
 export const httpMethod = {
   GET: 'GET',
   POST: 'POST',
@@ -76,18 +78,12 @@ const http = async <T>(url: string, config: RequestInit): Promise<T> => {
     ...config,
   })
   const response = await fetch(request)
-  const promise = response.json().then(decodeJSON, () => {})
-  console.log(url)
-  if (!response.ok) {
-    const json = await promise
-    throw new Error(json.message || response.statusText)
-  }
-  return promise
+  return response as any
 }
 
 const get = async <T = BasicResponse>(url: string, config?: RequestInit) => {
   const init = { method: httpMethod.GET, ...config }
-  return http<T>(url, init)
+  return http<T>(`${BASE_URL}${url}`, init)
 }
 
 const _delete = async <T = BasicResponse>(
@@ -95,7 +91,7 @@ const _delete = async <T = BasicResponse>(
   config?: RequestInit
 ) => {
   const init = { method: httpMethod.DELETE, ...config }
-  return http<T>(url, init)
+  return http<T>(`${BASE_URL}${url}`, init)
 }
 
 const post = async <T = BasicResponse>(
@@ -108,13 +104,13 @@ const post = async <T = BasicResponse>(
     body: JSON.stringify(body),
     ...config,
   }
-  console.log(url)
-  return http<T>(url, init)
+  console.log(`${BASE_URL}${url}`)
+  return http<T>(`${BASE_URL}${url}`, init)
 }
 
 const put = async <T>(url: string, body: object, config?: RequestInit) => {
   const init = { method: httpMethod.PUT, body: JSON.stringify(body), ...config }
-  return http<T>(url, init)
+  return http<T>(`${BASE_URL}${url}`, init)
 }
 
 export const fetchAPI = {
@@ -126,5 +122,5 @@ export const fetchAPI = {
 
 export const ws = (url: string) => {
   const csrfToken = getCookieValue(headers.csrf)
-  return new WebSocket(withCSRFToken(url, csrfToken))
+  return new WebSocket(withCSRFToken(`${BASE_URL}${url}`, csrfToken))
 }

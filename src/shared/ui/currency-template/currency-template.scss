@@ -1,0 +1,40 @@
+.Request {
+  display: grid;
+  grid-template-areas: 'icon LeftTop RightTop' 'icon LeftBottom RightBottom';
+  grid-template-columns: min-content;
+  grid-template-rows: min-content;
+  gap: 3px;
+  column-gap: 10px;
+
+  .icon {
+    grid-area: icon;
+    width: 42px;
+    height: 42px;
+    justify-self: start;
+    align-self: end;
+    background: red;
+    border-radius: 50px;
+  }
+  .rightBottom {
+    grid-area: RightBottom;
+    font-size: 10px;
+  }
+  .rightTop {
+    grid-area: RightTop;
+    align-self: flex-start;
+    font-weight: 600;
+  }
+
+  .rightTop,
+  .rightBottom {
+    justify-self: end;
+  }
+  .leftTop {
+    grid-area: LeftTop;
+  }
+  .leftBottom {
+    grid-area: LeftBottom;
+    font-size: 10px;
+    color: #949494;
+  }
+}

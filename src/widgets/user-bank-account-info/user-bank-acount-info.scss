@@ -1,16 +1,19 @@
 .UserBankAccountInfo {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  width: 100%;
+  grid-template-areas: 'totalAmount mode' 'allTime mode';
   gap: 8px;
   .currency {
     font-size: 14px;
   }
   .totalAmount {
+    grid-area: totalAmount;
     font-size: 36px;
     font-weight: bold;
   }
 
   .allTime {
+    grid-area: allTime;
     font-size: 10px;
     .absolute {
     }
@@ -18,6 +21,23 @@
       &.positive {
         color: #51e71c;
       }
+    }
+  }
+
+  .mode {
+    grid-area: mode;
+    align-self: center;
+    justify-self: end;
+    .modeItem {
+      width: 35px;
+      height: 35px;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 auto;
+      color: #575757;
+      font-size: 24px;
+      background: #262626;
+      border-radius: 6px;
     }
   }
 }

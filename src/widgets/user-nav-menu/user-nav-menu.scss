@@ -2,16 +2,21 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-
+  min-height: 90px;
   width: calc(100vw - 30px);
-  position: absolute;
-  bottom: 0;
   background: #000;
-  padding: 28px 15px;
+  padding: 0 15px;
 
   svg {
     width: 23px;
     height: 22px;
-    fill: #fff;
+    fill: #ccc !important;
+    path {
+      fill: #ccc !important;
+    }
+  }
+
+  .active {
+    fill: #fff !important;
   }
 }
