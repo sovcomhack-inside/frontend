@@ -76,8 +76,7 @@ const http = async <T>(url: string, config: RequestInit): Promise<T> => {
     ...config,
   })
   const response = await fetch(request)
-  const promise = response.json().then(decodeJSON, () => {})
-  console.log(url)
+  const promise = response.json().then(decodeJSON, () => { })
   if (!response.ok) {
     const json = await promise
     throw new Error(json.message || response.statusText)
@@ -108,7 +107,6 @@ const post = async <T = BasicResponse>(
     body: JSON.stringify(body),
     ...config,
   }
-  console.log(url)
   return http<T>(url, init)
 }
 

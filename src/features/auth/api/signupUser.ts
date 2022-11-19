@@ -7,5 +7,4 @@ export type SignupUserRequest = {
   password: string
 }
 
-export const signupUser = (dto: SignupUserRequest) =>
-  fetchAPI.post('http://127.0.0.1:8080/api/auth/signup', dto)
+export const signupUser = (dto: SignupUserRequest) => fetchAPI.post('api/v1/auth/signup', dto)
