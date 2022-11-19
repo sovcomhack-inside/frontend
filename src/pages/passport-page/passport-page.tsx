@@ -4,17 +4,13 @@ import { DonePage } from 'shared/pages'
 import { ManualStep } from './steps/manual-step'
 import { PhoneStep } from './steps/phone-step'
 import { SmsStep } from './steps/sms-step'
-import { StartStep } from './steps/start-step'
 import { PassportSteps } from './types'
 
 export const PassportPage: React.FC<any> = () => {
   const navigator = useNavigate()
-  const [step, setStep] = useState(PassportSteps.DONE)
+  const [step, setStep] = useState(PassportSteps.MANUAL_TYPE)
 
   const mapByStep: Record<string, JSX.Element> = {
-    [PassportSteps.START]: (
-      <StartStep nextStep={() => setStep(PassportSteps.MANUAL_TYPE)} />
-    ),
     [PassportSteps.MANUAL_TYPE]: (
       <ManualStep
         nextStep={() => setStep(PassportSteps.PHONE)}

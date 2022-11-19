@@ -14,10 +14,12 @@ body {
   background: #121212;
   font-size: 14px;
   color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 .markedText {
-  color: $blue;
+  color: $blue !important;
 }
 
 a {

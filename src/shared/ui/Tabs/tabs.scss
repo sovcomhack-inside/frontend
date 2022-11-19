@@ -1,0 +1,28 @@
+.Tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .titlesContainer {
+    display: flex;
+    gap: 10px;
+  }
+  .title {
+    padding-bottom: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    position: relative;
+    &.isActive::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: #6372fb;
+      border-radius: 2px;
+    }
+  }
+
+  .Tab {
+  }
+}

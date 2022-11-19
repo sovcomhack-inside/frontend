@@ -1,0 +1,17 @@
+.Nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: calc(100vw - 30px);
+  position: absolute;
+  bottom: 0;
+  background: #000;
+  padding: 28px 15px;
+
+  svg {
+    width: 23px;
+    height: 22px;
+    fill: #fff;
+  }
+}
