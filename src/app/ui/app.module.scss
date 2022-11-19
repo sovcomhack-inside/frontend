@@ -7,7 +7,7 @@ $blue: #6372fb;
 }
 
 * {
-  font-family: 'Averta' !important;
+  font-family: 'Averta';
 }
 
 body {
@@ -19,7 +19,7 @@ body {
 }
 
 .markedText {
-  color: $blue !important;
+  color: $blue;
 }
 
 a {
@@ -48,6 +48,7 @@ p {
   margin: 0 auto;
   max-width: 300px;
   width: 300px;
+  max-height: 100vh;
 
   color: $white;
 }

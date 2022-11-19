@@ -59,7 +59,6 @@
     "semver": "^7.3.8",
     "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.2.4",
     "terser-webpack-plugin": "^5.3.6",
     "web-vitals": "^3.1.0",
     "webpack": "^5.75.0",
@@ -100,6 +99,7 @@
     "npm-watch": "^0.11.0",
     "process": "^0.11.10",
     "sass-loader": "^13.2.0",
+    "tailwindcss": "^3.2.4",
     "typescript": "^4.9.3"
   },
   "jest": {
@@ -113,7 +113,7 @@
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupFilesAfterEnv": [ ],
+    "setupFilesAfterEnv": [],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
@@ -128,7 +128,7 @@
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"
     ],
-    "modulePaths": [ ],
+    "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
       "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"

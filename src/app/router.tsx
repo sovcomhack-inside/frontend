@@ -3,6 +3,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'
 import { WithMenuComponent } from './ui/WithMenuComponent'
 import { ProfilePage } from 'pages'
+import { AccountsPage } from 'pages/accounts/accounts'
+import { AdminLoginPage } from 'pages/admin/admin-page'
+import { AdminManagePage } from 'pages/admin/admin-manage'
 
 export const router = createBrowserRouter([
   {
@@ -28,5 +31,17 @@ export const router = createBrowserRouter([
         <ProfilePage />
       </WithMenuComponent>
     ),
+  },
+  {
+    path: '/accounts',
+    element: <AccountsPage />,
+  },
+  {
+    path: '/admin/login',
+    element: <AdminLoginPage />,
+  },
+  {
+    path: '/admin/manage',
+    element: <AdminManagePage />,
   },
 ])
