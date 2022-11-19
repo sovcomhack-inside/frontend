@@ -76,6 +76,9 @@ const http = async <T>(url: string, config: RequestInit): Promise<T> => {
     ...config,
   })
   const response = await fetch(request)
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
   return response.json().then(decodeJSON)
 }
 

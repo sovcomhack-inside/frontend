@@ -27,7 +27,7 @@ export const AdminManagePage: React.FC = (props) => {
 
   const mapUser = (user: User) => {
     return <div className='bg-neutral-900 px-8 py-2 rounded-sm hover:bg-neutral-800 hover:cursor-pointer' onClick={approveUser(user.id)}>
-      {user.id}
+      {user.firstName} {user.lastName} | {user.email} | user id = {user.id}
     </div>
   }
 
