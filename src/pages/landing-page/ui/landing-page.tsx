@@ -1,7 +1,6 @@
 import { appCss } from 'app'
 import classNames from 'classnames'
-import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { WhiteButton } from 'shared/ui/Button'
 import { AttentionIcon } from './assets/AttentionIcon'
 import { CheckboxIcon } from './assets/CheckboxIcon'

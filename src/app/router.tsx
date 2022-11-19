@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { LandingPage } from 'pages/landing-page'
 import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'

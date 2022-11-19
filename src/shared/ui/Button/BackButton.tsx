@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowLeft } from '../Icons'
+import { ArrowLeft } from 'shared/ui/Icons'
 import { WhiteButton } from './WhiteButton'
 
 export const BackButton: React.FC<React.HTMLProps<HTMLButtonElement>> = (

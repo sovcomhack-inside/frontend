@@ -128,14 +128,15 @@ checkBrowsers(paths.appPath, isInteractive)
       }
 
       console.log(chalk.cyan('Starting the development server...\n'))
-      openBrowser(urls.localUrlForBrowser)
+      // openBrowser(urls.localUrlForBrowser)
+      openBrowser("http://127.0.0.1")
     })
-    ;['SIGINT', 'SIGTERM'].forEach(function (sig) {
-      process.on(sig, function () {
-        devServer.close()
-        process.exit()
+      ;['SIGINT', 'SIGTERM'].forEach(function (sig) {
+        process.on(sig, function () {
+          devServer.close()
+          process.exit()
+        })
       })
-    })
 
     if (process.env.CI !== 'true') {
       // Gracefully exit when stdin ends

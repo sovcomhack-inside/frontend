@@ -16,6 +16,7 @@
   max-height: 100vh;
   display: grid;
   grid-template-rows: 180px 1fr 1.4fr;
+
   .LoginForm {
     display: grid;
     grid-template-rows: min-content min-content 200px;
@@ -25,6 +26,7 @@
     div {
       width: 250px;
     }
+
     button {
       width: 250px;
     }
@@ -35,11 +37,13 @@
   max-height: 100vh;
   display: grid;
   grid-template-rows: 150px 150px;
+
   .SignupForm {
     margin: 0 auto;
     display: grid;
     grid-template-rows: min-content 200px;
     gap: 10px;
+
     button {
       align-self: end;
     }

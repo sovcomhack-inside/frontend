@@ -1,6 +1,6 @@
 import React from 'react'
 import { BlueButton, Button, MoniTitle, WithFormPage } from 'shared/ui'
-import { WithSetStep } from '../types'
+import { WithSetStep } from 'pages/passport-page/types'
 import styles from './steps.scss'
 
 export const StartStep: React.FC<WithSetStep> = (props) => {

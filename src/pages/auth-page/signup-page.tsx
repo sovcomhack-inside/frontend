@@ -1,4 +1,3 @@
-import React from 'react'
 import { appCss } from 'app'
 import classNames from 'classnames'
 import { useNavigate } from 'react-router-dom'

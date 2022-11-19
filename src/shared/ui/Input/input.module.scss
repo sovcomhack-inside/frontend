@@ -11,7 +11,8 @@
 }
 
 input:-internal-autofill-selected {
-  -webkit-box-shadow: 0 0 0 50px #151515 inset; /* Change the color to your own background color */
+  -webkit-box-shadow: 0 0 0 50px #151515 inset;
+  /* Change the color to your own background color */
   -webkit-text-fill-color: rgba(255, 255, 255, 0.4);
   border: none;
   border-radius: 0px;
@@ -29,6 +30,7 @@ input:-internal-autofill-selected {
     padding-left: 20px;
     width: 30px;
   }
+
   .Input {
     padding-left: 15px;
     outline: none;

@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { MoniTitle, WhiteButton, WithFormPage, WithTitleInput } from 'shared/ui'
-import { WithSetStep } from '../types'
+import { WithSetStep } from 'pages/passport-page/types'
 import styles from './steps.scss'
 
 export const PhoneStep: React.FC<WithSetStep> = (props) => {

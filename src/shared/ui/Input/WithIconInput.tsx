@@ -1,6 +1,4 @@
-import classNames from 'classnames'
 import React from 'react'
-import { UserIcon } from '../Icons'
 import { Input, InputProps } from './Input'
 import styles from './input.module.scss'
 

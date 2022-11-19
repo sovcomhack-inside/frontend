@@ -1,12 +1,11 @@
 import { appCss } from 'app'
 import classNames from 'classnames'
-import React, { FormEvent, FormEventHandler, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { BlueButton, WhiteButton } from 'shared/ui/Button'
+import React, { FormEvent } from 'react'
+import { BlueButton } from 'shared/ui/Button'
 import { LetterIcon, LockIcon, UserIcon } from 'shared/ui/Icons'
-import { WithIconInput } from 'shared/ui/Input'
-import { AuthApi } from '../api'
+import { WithIconInput } from 'shared/ui'
 import styles from './auth.scss'
+import { signupUser } from 'features/auth/api/signupUser'
 
 interface SignupFormProps extends React.HTMLProps<HTMLDivElement> {
   onButtonClick?: () => void
@@ -24,7 +23,7 @@ export const SignupForm: React.FC<SignupFormProps> = (props) => {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value,
     }
-    AuthApi.signUp(data)
+    signupUser(data).then((response) => console.log(response));
   }
 
   return (

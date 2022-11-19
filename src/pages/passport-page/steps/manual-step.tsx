@@ -1,4 +1,5 @@
 import { appCss } from 'app'
+import { WithSetStep } from 'pages/passport-page/types'
 import {
   BlueButton,
   MoniTitle,
@@ -6,7 +7,6 @@ import {
   WithFormPage,
   WithTitleInput,
 } from 'shared/ui'
-import { WithSetStep } from '../types'
 import styles from './steps.scss'
 
 const titles = [
