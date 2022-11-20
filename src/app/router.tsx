@@ -2,7 +2,7 @@ import { LandingPage } from 'pages/landing-page'
 import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'
 import { WithMenuComponent } from './ui/WithMenuComponent'
-import { ProfilePage } from 'pages'
+import { ProfilePage, ReqsPage } from 'pages'
 import { AdminLoginPage } from 'pages/admin/admin-page'
 import { CardsPage } from 'pages/cards/cards-page'
 import { CardsNewPage } from 'pages/cards/cards-new-page'
@@ -58,6 +58,10 @@ export const router = createBrowserRouter([
   {
     path: '/profile',
     element: <ProfilePage />,
+  },
+  {
+    path: '/profile/reqs',
+    element: <ReqsPage />,
   },
   {
     path: '/settings',

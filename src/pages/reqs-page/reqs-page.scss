@@ -1,0 +1,11 @@
+.container {
+  span {
+    display: block;
+  }
+  span:nth-child(2n + 1) {
+    margin-top: 10px;
+  }
+  span:nth-child(2n) {
+    font-weight: bold;
+  }
+}

@@ -115,6 +115,12 @@ p {
     }
   }
 
+  &.success {
+    .title {
+      color: green;
+    }
+  }
+
   .title {
     font-weight: bold;
     font-size: 14px;

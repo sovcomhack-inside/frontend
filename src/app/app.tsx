@@ -12,7 +12,7 @@ export const App = observer(() => {
   useEffect(() => {
     AuthModel.getUser()
   }, [])
-  const routerProvider = UserModel.id ? router : unauthRouter
+  const routerProvider = router
   return (
     <div className="app">
       <RouterProvider router={routerProvider} />
@@ -21,6 +21,7 @@ export const App = observer(() => {
         <div
           className={classNames(s.notify, {
             [s.error]: NotificationService.type === 'error',
+            [s.success]: NotificationService.type === 'success',
           })}
         >
           <span className={s.title}>{NotificationService.message}</span>

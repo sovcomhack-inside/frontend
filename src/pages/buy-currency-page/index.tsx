@@ -17,8 +17,7 @@ interface BuyCurrencyPageProps {}
 
 export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()
-  const params = useParams()
-  const currency = CurrencyModel.findByCode(params?.id ?? '')
+  const currency = CurrencyModel.findByCode(CurrencyModel.selected)
   const pageName = currency?.code
   const [amount, setAmount] = useState(0)
 
