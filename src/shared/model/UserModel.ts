@@ -5,6 +5,7 @@ import {
   UserService,
 } from 'shared/api/UserService/UserService'
 import { CurrencyModel } from 'widgets'
+import { NotificationService } from './NotificationService'
 import { FetchStatuses } from './types'
 
 type RequestStatus = 'Заявка создана' | 'В обработке'
@@ -78,7 +79,8 @@ class _UserModel {
     const newAcc: UserAccountApi = await UserService.createAccount({
       currency: code,
     })
-    this._accounts?.push(this.fromApiToNormal(newAcc))
+    this._fetchAccounts()
+    NotificationService.success('Успешно')
   }
 }
 

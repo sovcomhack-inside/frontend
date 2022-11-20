@@ -19,7 +19,7 @@ export const httpMethod = {
 }
 
 const defaultOptions: RequestInit = {
-  mode: 'same-origin',
+  mode: 'no-cors',
   credentials: 'same-origin',
   headers: {
     Accept: 'application/json',

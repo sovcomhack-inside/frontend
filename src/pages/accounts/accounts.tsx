@@ -5,27 +5,23 @@ import '../../input.css'
 import { UserAccount } from 'shared/api/UserService/UserService'
 import { UserModel } from 'shared/model'
 import { observer } from 'mobx-react-lite'
+import { CurrencyTemplate } from 'shared/ui/currency-template'
+import CurrencyFlag from 'react-currency-flags'
 
 export const AccountsPage: React.FC = observer(() => {
   const navigate = useNavigate()
 
   const accounts = UserModel.accounts
 
-  const mapAccount = (account: UserAccount) => {
-    return (
-      <div className="flex flex-row justify-between place-items-center rounded-md p-6 bg-neutral-900">
-        <div className="flex flex-col gap-1">
-          <div className="text-lg font-bold">{account.balance}</div>
-          <div className="text-xss text-neutral-400">
-            Cоздан: {account.createdAt}
-          </div>
-        </div>
-        <div className="rounded-full w-10 grid place-items-center aspect-square bg-white text-black">
-          $
-        </div>
-      </div>
-    )
-  }
+  const mapAccount = (account: UserAccount) => (
+    <CurrencyTemplate
+      icon={<CurrencyFlag currency={account.currency} size="md" />}
+      leftTop={`${account.balance}`}
+      leftBottom={
+        <span>Cоздан: {new Date(account.createdAt).toDateString()}</span>
+      }
+    />
+  )
 
   return (
     <div className="flex flex-col w-80 mx-auto gap-12 mt-8">
