@@ -1,13 +1,10 @@
 import { LandingPage } from 'pages/landing-page'
 import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'
-import { WithMenuComponent } from './ui/WithMenuComponent'
-import { ProfilePage, ReqsPage } from 'pages'
+import { CardsNewPage, ProfilePage, ReqsPage } from 'pages'
 import { AdminLoginPage } from 'pages/admin/admin-page'
-import { CardsPage } from 'pages/cards/cards-page'
-import { CardsNewPage } from 'pages/cards/cards-new-page'
+import { CardsPage } from 'pages/cards-page/cards-page'
 import { CurrenciesList } from 'widgets'
-import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { CurrencyPage } from 'pages/currency-page'
 import { AdminManagePage } from 'pages/admin/admin-manage'
 import { AccountsPage } from 'pages/accounts/accounts'
@@ -41,19 +38,19 @@ export const unauthRouter = createBrowserRouter([
 export const router = createBrowserRouter([
   {
     path: '/new',
-    element: <ProfilePage />,
+    element: <MainPage />,
   },
   {
     path: '/',
-    element: <ProfilePage />,
+    element: <LandingPage />,
   },
   {
     path: '/login',
-    element: <ProfilePage />,
+    element: <LoginPage />,
   },
   {
     path: '/signup',
-    element: <ProfilePage />,
+    element: <SignupPage />,
   },
   {
     path: '/profile',
@@ -86,10 +83,6 @@ export const router = createBrowserRouter([
   {
     path: '/cards',
     element: <CardsPage />,
-  },
-  {
-    path: '/cards/new',
-    element: <CardsNewPage />,
   },
   {
     path: '/currencies',

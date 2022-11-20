@@ -6,6 +6,7 @@ export interface User {
   firstName: string
   lastName: string
   image: string
+  accountId: string
 }
 export interface UserSignupApi {
   email: string

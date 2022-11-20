@@ -23,7 +23,7 @@ export const CurrencyTemplate: React.FC<CurrencyTemplateProps> = ({
   onClick,
 }) => {
   return (
-    <div className={classNames(s.Request, containerClass)}>
+    <div className={classNames(s.Request, containerClass)} onClick={onClick}>
       <span className={s.icon} onClick={onClick}>
         {icon}
       </span>

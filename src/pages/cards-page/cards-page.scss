@@ -1,0 +1,52 @@
+.CardPage {
+  padding-top: 40px;
+  .container {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background: #181818;
+    border-radius: 6px;
+    cursor: pointer;
+    .cardTemplate {
+      align-self: center;
+      background: #000;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 12px;
+      padding: 13px 5px;
+    }
+  }
+}
+
+.payStep {
+  padding-top: 30px;
+  display: grid;
+  align-items: center;
+  .cardMarkup {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background: #000;
+    width: 225px;
+    padding: 30px 0;
+    border-radius: 14.2405px;
+    font-weight: 600;
+    font-size: 30.1772px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+  }
+  .cvv {
+    margin-bottom: 20px;
+    width: 130px;
+  }
+  .summ {
+    margin-top: 5px;
+    width: 100%;
+  }
+  .button {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 251px;
+    align-self: flex-end;
+  }
+}
