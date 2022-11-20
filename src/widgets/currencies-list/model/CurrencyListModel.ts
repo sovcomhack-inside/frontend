@@ -91,7 +91,7 @@ class _CurrencyModel {
     if (this.selected == null) {
       throw new Error('Selected string is null')
     }
-    if (this._data) {
+    if (this._data && this._data.code !== this.selected) {
       return this._data
     }
     this._fetchData()
@@ -103,9 +103,15 @@ class _CurrencyModel {
     return this.list?.find((curr) => curr.code === code)
   }
 
-  @action
-  getCurrencyData = () => {
-    return this.data
+  @computed
+  getPoints = () => {
+    const res = this.data?.priceData.map(({ date, price }) => {
+      return {
+        date,
+        uv: price,
+      }
+    })
+    return res
   }
 }
 

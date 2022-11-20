@@ -35,19 +35,9 @@ export const GraphTab: React.FC<GraphTabProps> = observer((props) => {
     graphContainerClass: props.graphTabClass,
     dot: false,
     lineDataKey: 'uv',
-    data: points(),
+    data: CurrencyModel.getPoints(),
   }
 
-  function points() {
-    const res = CurrencyModel.data?.priceData.map(({ date, price }) => {
-      return {
-        date,
-        uv: price,
-      }
-    })
-    console.log(res)
-    return res
-  }
   return (
     <div className={s.GraphTab}>
       <div className={s.topBar}>
@@ -61,7 +51,6 @@ export const GraphTab: React.FC<GraphTabProps> = observer((props) => {
       </div>
       <div>
         {props.currency.code && <Graph {...graphProps} />}
-
         <span>buttons</span>
       </div>
       <div className={s.buttons}>

@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import '../../input.css'
 import { UserAccount } from 'shared/api/UserService/UserService'
 import { UserModel } from 'shared/model'
+import { observer } from 'mobx-react-lite'
 
-export const AccountsPage: React.FC = () => {
+export const AccountsPage: React.FC = observer(() => {
   const navigate = useNavigate()
 
   const accounts = UserModel.accounts
@@ -44,4 +45,4 @@ export const AccountsPage: React.FC = () => {
       </Link>
     </div>
   )
-}
+})
