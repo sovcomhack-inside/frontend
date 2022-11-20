@@ -105,6 +105,17 @@ class _UserModel {
     }
   }
 
+  withdrawAccount = async (amount: number) => {
+    if (this.mainAccountNumber == null) {
+      throw new Error('Selected code is null')
+    }
+    const response = await UserService.withdrawAccount({
+      account_number: this.mainAccountNumber,
+      credit_amount_cents: amount,
+    })
+    this._fetchAccounts()
+  }
+
   fetchHistory = async () => {
     if (this.mainAccountNumber == null) {
       AuthModel.getUser()
@@ -125,15 +136,9 @@ class _UserModel {
     return this.operations
   }
 
-  async buy() {
-    await UserService.buyAccount({
-      currency_from: 'RUB',
-      currency_to: 'USD',
-      account_number_from: 'USD',
-      account_number_to: 'RUB',
-      desired_amount_cents: 50,
-    })
-    NotificationService.success()
+  buy(amount: number) {
+    this.withdrawAccount(amount)
+    NotificationService.success('Успешно')
   }
 
   @computed get mainAccount() {

@@ -82,7 +82,7 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
         </div>
         <div className={s.button}>
           <WhiteButton
-            onClick={() => UserModel.buy()}
+            onClick={() => UserModel.buy(currency.currentPrice * amount)}
             value={'Купить сейчас'}
           />
         </div>
