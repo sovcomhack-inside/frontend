@@ -1,10 +1,13 @@
+import { AuthModel } from 'features/auth/model'
 import { computed, makeAutoObservable, action } from 'mobx'
+import { AuthService, fetchAPI } from 'shared/api'
 import {
+  RefillAccount,
   UserAccount,
   UserAccountApi,
   UserService,
 } from 'shared/api/UserService/UserService'
-import { CurrencyModel } from 'widgets'
+import { Operation } from 'shared/api/UserService/utils'
 import { NotificationService } from './NotificationService'
 import { FetchStatuses } from './types'
 
@@ -29,6 +32,9 @@ class _UserModel {
   lastName: string = ''
   email: string = ''
   status: FetchStatuses = FetchStatuses.idle
+  mainAccountNumber: string | null = null
+  operations: Operation[] | null = null
+
   _accounts: UserAccount[] | null = null
 
   constructor() {
@@ -67,6 +73,11 @@ class _UserModel {
     return this._accounts
   }
 
+  getAccountByNumber = (number: string | undefined) => {
+    if (!number) return undefined
+    return this.accounts?.find((acc) => acc.number === number)
+  }
+
   getAccountByCode = (code: string | undefined) => {
     if (!code) return undefined
     return this.accounts?.find((acc) => acc.currency === code)
@@ -76,14 +87,46 @@ class _UserModel {
     if (code == null) {
       throw new Error('Selected code is null')
     }
-    this._fetchAccounts()
-    NotificationService.success('Успешно')
+    UserService.createAccount({ currency: code })
+    await this._fetchAccounts()
   }
 
-  depositMoney = (amount: number) => {
-    const obj = {
-      debit_amount_cents: amount,
+  depositMoney = async (amount: number) => {
+    if (this.mainAccountNumber == null) {
+      throw new Error('Selected code is null')
     }
+    const response = await UserService.refillAccount({
+      account_number: this.mainAccountNumber,
+      debit_amount_cents: amount,
+    })
+    const acc = this.getAccountByNumber(response.account_number)
+    if (acc) {
+      acc.balance = response.new_balance
+    }
+  }
+
+  fetchHistory = async () => {
+    if (this.mainAccountNumber == null) {
+      AuthModel.getUser()
+    }
+    if (this.mainAccountNumber != null) {
+      const response = await UserService.operationList({
+        account_numbers_in: [this.mainAccountNumber],
+      })
+      this.operations = response.operations
+    }
+  }
+
+  @computed
+  get history() {
+    if (!this.operations) {
+      this.fetchHistory()
+    }
+    return this.operations
+  }
+
+  @computed get mainAccount() {
+    return this.accounts?.find((acc) => acc.number === this.mainAccountNumber)
   }
 }
 

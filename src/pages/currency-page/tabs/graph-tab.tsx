@@ -21,19 +21,20 @@ export const GraphTab: React.FC<GraphTabProps> = observer((props) => {
     height: 212,
     gridStroke: '#222',
     lineStrokeColor: '#fff',
-    xDataKey: 'name',
+    xDataKey: 'date',
     tooltipContent: (props: any) => {
       const payload = props.payload[0]?.payload ?? {}
       return (
-        <>
-          {payload.name} {payload.uv}
-        </>
+        <div className={s.tooltip}>
+          <span>{payload.date}</span>
+          <span>{payload.uv}</span>
+        </div>
       )
     },
     graphContainerClass: props.graphTabClass,
     dot: false,
     lineDataKey: 'uv',
-    data: CurrencyModel.getPoints(),
+    data: CurrencyModel.getPoints,
   }
 
   return (
@@ -49,7 +50,32 @@ export const GraphTab: React.FC<GraphTabProps> = observer((props) => {
       </div>
       <div>
         {props.currency.code && <Graph {...graphProps} />}
-        <span>buttons</span>
+        <div className={s.periodButtons}>
+          <span
+            className={classNames(s.periodButton, {
+              [s.acitve]: CurrencyModel.days === 1,
+            })}
+            onClick={() => CurrencyModel.setDay(1)}
+          >
+            День
+          </span>
+          <span
+            className={classNames(s.periodButton, {
+              [s.acitve]: CurrencyModel.days === 14,
+            })}
+            onClick={() => CurrencyModel.setDay(14)}
+          >
+            2 Недели
+          </span>
+          <span
+            className={classNames(s.periodButton, {
+              [s.acitve]: CurrencyModel.days === 31,
+            })}
+            onClick={() => CurrencyModel.setDay(31)}
+          >
+            Месяц{' '}
+          </span>
+        </div>
       </div>
       <div className={s.buttons}>
         <BlueButton value={'Торгуем за вас'} />

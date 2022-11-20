@@ -11,6 +11,7 @@ import { AccountsPage } from 'pages/accounts/accounts'
 import { BuyCurrencyPage } from 'pages/buy-currency-page'
 import { SettingsPage } from 'pages/settings-page'
 import { AccountsNewPage } from 'pages/accounts/accounts-new-page'
+import { HistoryPage } from 'pages/history-page'
 
 export const unauthRouter = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
     element: <ReqsPage />,
   },
   {
+    path: '/profile/history',
+    element: <HistoryPage />,
+  },
+  {
     path: '/settings',
     element: <SettingsPage />,
   },
@@ -95,5 +100,9 @@ export const router = createBrowserRouter([
   {
     path: '/buy/:id',
     element: <BuyCurrencyPage />,
+  },
+  {
+    path: '*',
+    element: <ProfilePage />,
   },
 ])

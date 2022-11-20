@@ -6,6 +6,7 @@ import { WithNamePage } from 'shared/pages/with-name-page'
 import { CurrencyTemplate } from 'shared/ui/currency-template'
 import s from './cards-page.scss'
 import { Input, WhiteButton, WithTitleInput } from 'shared/ui'
+import { UserModel } from 'shared/model'
 
 export const CardsPage: React.FC = () => {
   const [showPay, setShowPay] = useState(false)
@@ -32,6 +33,7 @@ export const CardsPage: React.FC = () => {
         ) : (
           <div className={s.payStep}>
             <div className={s.cardMarkup}>совкомбанк</div>
+
             <Input
               className={s.cvv}
               placeholder="CVV"
@@ -46,7 +48,7 @@ export const CardsPage: React.FC = () => {
             <WhiteButton
               className={s.button}
               value="Пополнить"
-              onClick={() => {}}
+              onClick={() => UserModel.depositMoney(Number(summ))}
             />
           </div>
         )}

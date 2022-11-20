@@ -1,0 +1,27 @@
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .item {
+    .purpose {
+      grid-area: purpose;
+    }
+    .before {
+      grid-area: before;
+    }
+    .after {
+      grid-area: after;
+    }
+    .curBefore {
+      grid-area: curBefore;
+    }
+    .curAfter {
+      grid-area: curAfter;
+    }
+    .rate {
+      grid-area: rate;
+    }
+  }
+}

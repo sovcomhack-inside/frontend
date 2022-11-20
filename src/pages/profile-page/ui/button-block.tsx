@@ -14,7 +14,7 @@ export const ButtonsBlock = () => {
       </div>
       <div className={classNames(s.item, s.analytics)}>
         <PieChartIcon />
-        <span>Аналитика портфеля</span>
+        <span onClick={() => nav('/profile/history')}>История портфеля</span>
       </div>
       <div className={classNames(s.item, s.about)}>
         <span className={s.title}>Больше о долларе</span>

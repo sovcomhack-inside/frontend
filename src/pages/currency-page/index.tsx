@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BlueButton, Tabs, WhiteButton } from 'shared/ui'
 import { GraphTab } from './tabs'
 
@@ -23,6 +23,12 @@ export const CurrencyPage: React.FC<CurrencyPageProps> = observer(() => {
       <div>Валюты нет</div>
     ),
   }
+
+  useEffect(() => {
+    if (params.id) {
+      CurrencyModel.setSelected(params.id)
+    }
+  }, [])
 
   return (
     <WithMenuComponent>

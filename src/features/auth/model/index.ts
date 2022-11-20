@@ -1,7 +1,6 @@
 import { computed, makeAutoObservable, observable } from 'mobx'
-import { AuthService } from 'shared/api/authorization-service'
+import { AuthService, User } from 'shared/api/authorization-service'
 import { UserModel } from 'shared/model'
-import { User } from '../api/types'
 
 class PassportModel {
   fullName: string = ''
@@ -91,6 +90,7 @@ export class _AuthModel {
     UserModel.id = data.id
     UserModel.firstName = data.firstName
     UserModel.lastName = data.lastName
+    UserModel.mainAccountNumber = data.mainAccountNumber
   }
 
   private _signup = async () => {
@@ -100,6 +100,7 @@ export class _AuthModel {
       lastName: this.passport.fullName.split(' ')[1],
       password: this.password,
     })
+
     this.fillData(response)
     this.status = 'idle'
   }
@@ -131,7 +132,7 @@ export class _AuthModel {
 
   private _getUser = async () => {
     const res = await AuthService.getUser()
-    UserModel.id = res.id
+    UserModel.mainAccountNumber = res.mainAccountNumber
   }
 
   public getUser = () => {

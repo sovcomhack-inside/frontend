@@ -1,5 +1,5 @@
 import { fetchAPI } from 'shared/api'
-import { BuyOrSellAccount } from './utils'
+import { BuyOrSellAccount, Operation } from './utils'
 
 export interface UserAccountApi {
   account: {
@@ -27,7 +27,7 @@ export interface CreateAccount {
   currency: string
 }
 
-interface RefillAccount {
+export interface RefillAccount {
   account_number: string
   debit_amount_cents: number
 }
@@ -59,6 +59,14 @@ interface SellAccontApi {
   account_number_to: string
   currency_to: string
 }
+interface ListOperationApi {
+  account_numbers_in: string[]
+  operation_types_in?: string[]
+}
+
+export interface OperationsApi {
+  operations: Operation[]
+}
 
 export interface UserService {
   createAccount(data: CreateAccount): Promise<UserAccountApi>
@@ -67,6 +75,7 @@ export interface UserService {
   withdrawAccount(data: WithDrawAccount): Promise<AccountInfo>
   sellAccount(data: SellAccontApi): Promise<BuyOrSellAccount>
   buyAccount(data: BuyAccontApi): Promise<BuyOrSellAccount>
+  operationList(data: ListOperationApi): Promise<OperationsApi>
 }
 
 export class _UserServiceImpl implements UserService {
@@ -78,7 +87,7 @@ export class _UserServiceImpl implements UserService {
     return fetchAPI.get('/accounts/list')
   }
   refillAccount(data: RefillAccount): Promise<AccountInfo> {
-    return fetchAPI.post('/accounts/refll', data)
+    return fetchAPI.post('/accounts/refill', data)
   }
   withdrawAccount(data: WithDrawAccount): Promise<AccountInfo> {
     return fetchAPI.post('/accounts/withdraw', data)
@@ -88,6 +97,10 @@ export class _UserServiceImpl implements UserService {
   }
   sellAccount(data: SellAccontApi): Promise<BuyOrSellAccount> {
     return fetchAPI.post('/accounts/sell', data)
+  }
+
+  operationList(data: ListOperationApi): Promise<OperationsApi> {
+    return fetchAPI.post('/operations/list', data)
   }
 }
 

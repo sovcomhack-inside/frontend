@@ -1,4 +1,4 @@
-import { action, computed, makeAutoObservable } from 'mobx'
+import { action, computed, makeAutoObservable, reaction } from 'mobx'
 import { FetchStatuses } from 'shared/model'
 import { NotificationService } from 'shared/model/NotificationService'
 import {
@@ -14,6 +14,7 @@ class _CurrencyModel {
   _list: Currency[] | null = null
   _data: CurrencyData | null = null
   selected: string | null = null
+  days: number = 15
   constructor() {
     makeAutoObservable(this)
   }
@@ -21,7 +22,11 @@ class _CurrencyModel {
   @action
   setSelected(code: string) {
     this.selected = code
-    console.log(this.selected)
+  }
+
+  @action
+  setDay(n: number) {
+    this.days = n
   }
 
   @action
@@ -60,7 +65,7 @@ class _CurrencyModel {
     try {
       const data: CurrencyDataApi = await CurrencyService.getData(
         this.selected,
-        15,
+        this.days,
         'RUB'
       )
 
@@ -104,7 +109,8 @@ class _CurrencyModel {
     return this.list?.find((curr) => curr.code === code)
   }
 
-  getPoints = () => {
+  @computed
+  get getPoints() {
     const res = this.data?.priceData.map(({ date, price }) => {
       return {
         date,
@@ -116,3 +122,7 @@ class _CurrencyModel {
 }
 
 export const CurrencyModel = new _CurrencyModel()
+reaction(
+  () => CurrencyModel.days,
+  () => CurrencyModel._fetchData()
+)
