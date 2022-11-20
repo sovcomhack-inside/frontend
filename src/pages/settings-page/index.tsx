@@ -50,7 +50,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = () => {
             title="Выход"
             icon={<CancelIcon />}
           />
-          <TelegramLoginButton dataAuthUrl={"/api/v1/oauth/telegram"} botName="sovcomhack_inside_bot" />
+          <TelegramLoginButton buttonSize="medium" requestAccess="write" dataAuthUrl="/api/v1/oauth/telegram" botName="sovcomhack_inside_bot" />
         </div>
       </WithNamePage>
     </WithMenuComponent>
