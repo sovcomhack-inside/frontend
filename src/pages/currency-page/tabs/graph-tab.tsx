@@ -1,6 +1,11 @@
+import classNames from 'classnames'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { BlueButton, WhiteButton } from 'shared/ui'
 import { Graph, GraphProps } from 'shared/ui/graph'
+import { NotifyIcon } from 'shared/ui/Icons/NotifyIcon'
+import s from './tabs.scss'
 
 function getRandomInt(min: number, max: number) {
   min = Math.ceil(min)
@@ -24,9 +29,10 @@ interface GraphTabProps {
 }
 
 export const GraphTab: React.FC<GraphTabProps> = (props) => {
+  const nav = useNavigate()
   const graphProps: GraphProps = {
     yOrientation: 'right',
-    width: 350,
+    width: 320,
     height: 212,
     gridStroke: '#222',
     lineStrokeColor: '#fff',
@@ -45,5 +51,25 @@ export const GraphTab: React.FC<GraphTabProps> = (props) => {
     lineDataKey: 'uv',
     data: getRandomData(20),
   }
-  return <Graph {...graphProps} />
+  return (
+    <div className={s.GraphTab}>
+      <div className={s.topBar}>
+        <span className={s.price}>60.90 ₽</span>
+        <div>
+          <NotifyIcon />
+        </div>
+        <span className={classNames(s.percent, { [s.positivePercent]: true })}>
+          +0.53 (7.3%)
+        </span>
+      </div>
+      <div>
+        <Graph {...graphProps} />
+        <span>buttons</span>
+      </div>
+      <div className={s.buttons}>
+        <BlueButton value={'Торгуем за вас'} />
+        <WhiteButton value={'Купить'} onClick={() => nav('/buy')} />
+      </div>
+    </div>
+  )
 }

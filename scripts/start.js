@@ -132,12 +132,12 @@ checkBrowsers(paths.appPath, isInteractive)
       openBrowser(urls.localUrlForBrowser)
       // openBrowser('https://127.0.0.1')
     })
-      ;['SIGINT', 'SIGTERM'].forEach(function (sig) {
-        process.on(sig, function () {
-          devServer.close()
-          process.exit()
-        })
+    ;['SIGINT', 'SIGTERM'].forEach(function (sig) {
+      process.on(sig, function () {
+        devServer.close()
+        process.exit()
       })
+    })
 
     if (process.env.CI !== 'true') {
       // Gracefully exit when stdin ends

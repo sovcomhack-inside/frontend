@@ -1,0 +1,48 @@
+.BuyCurrencyPage {
+  display: grid;
+  gap: 40px;
+}
+.buyForm {
+  margin-top: 40px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  row-gap: 30px;
+  color: #717171;
+
+  div {
+    width: 251px;
+  }
+  input {
+    margin-top: 7px;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 5px;
+  }
+}
+
+.total {
+  color: #fff;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.button {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    width: 250px;
+  }
+}
+
+.containerClass {
+  width: 330px;
+  padding: 17px;
+  background: #151515;
+  border-radius: 5px;
+}

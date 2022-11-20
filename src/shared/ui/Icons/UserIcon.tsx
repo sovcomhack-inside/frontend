@@ -1,7 +1,6 @@
 import { IconProps } from 'shared/model'
 
 export const UserIcon: IconProps = (props) => {
-  console.log(props.color)
   return (
     <svg
       width="15"

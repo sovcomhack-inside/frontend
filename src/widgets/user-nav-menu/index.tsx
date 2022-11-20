@@ -25,8 +25,10 @@ export const UserNavMenu: React.FC<UserNavMenuProps> = (props) => {
         <UserIcon color={getColor('profile')} />
       </Link>
       <Link
-        to={{ pathname: '/shop' }}
-        className={classNames({ [styles.active]: props.activePage === 'shop' })}
+        to={{ pathname: '/currencies' }}
+        className={classNames({
+          [styles.active]: props.activePage === 'currencies',
+        })}
       >
         <PortfelIcon color={getColor('shop')} />
       </Link>

@@ -59,3 +59,26 @@ p {
   height: 100vh;
   row-gap: 50px;
 }
+
+.notify {
+  position: absolute;
+  min-width: 250px;
+  top: 10px;
+  right: 10px;
+  padding: 25px 15px;
+  background: #252525;
+  border-radius: 5px;
+  &.error {
+    .title {
+      color: red;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .subTitle {
+    font-size: 12px;
+  }
+}

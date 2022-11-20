@@ -1,12 +1,20 @@
 import { computed, makeAutoObservable } from 'mobx'
 import { fetchAPI } from 'shared/api'
 import { FetchStatuses } from 'shared/model'
+import { NotificationService } from 'shared/model/NotificationService'
 
 export interface Currency {
-  price: string
   name: string
   code: string
-  percent: string
+  price: number
+  percent: number
+}
+
+export interface CurrencyApi {
+  code: string
+  name: string
+  current_price: number
+  day_change_pct: number
 }
 
 class _CurrencyListModel {
@@ -18,34 +26,20 @@ class _CurrencyListModel {
   }
 
   _fetchData = async () => {
-    console.log('implement fetchData')
-
     this.status = FetchStatuses.fetch
-    console.log(1)
-    await new Promise((resolve, reject) => setTimeout(() => resolve(1), 3000))
-    console.log(2)
-    this._data = [
-      {
-        percent: '-11',
-        code: 'USD',
-        name: 'Доллар США',
-        price: '63.3',
-      },
-      {
-        percent: '-213',
-        code: 'USD',
-        name: 'Доллар США',
-        price: '63.3',
-      },
-      {
-        percent: '-9',
-        code: 'USD',
-        name: 'Доллар США',
-        price: '63.3',
-      },
-    ]
-    this.status = FetchStatuses.idle
-    // return await fetchAPI.get('/currency/list')
+    try {
+      const data: CurrencyApi[] = await fetchAPI.get('/currencies/list')
+      const formattedData: Currency[] = data.map((d) => ({
+        price: d.current_price,
+        code: d.code,
+        name: d.name,
+        percent: d.day_change_pct,
+      }))
+      this._data = formattedData
+      this.status = FetchStatuses.idle
+    } catch (err: any) {
+      NotificationService.error(err?.message)
+    }
   }
 
   fetchData = () => {
@@ -60,6 +54,10 @@ class _CurrencyListModel {
     this.fetchData()
     console.log(this._data)
     return this._data
+  }
+
+  findByCode = (code: string): Currency | undefined => {
+    return this.data?.find((curr) => curr.code === code)
   }
 }
 

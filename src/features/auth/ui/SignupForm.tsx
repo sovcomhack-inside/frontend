@@ -1,12 +1,11 @@
 import { appCss } from 'app'
 import classNames from 'classnames'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent } from 'react'
 import { BlueButton } from 'shared/ui/Button'
-import { LetterIcon, LockIcon, UserIcon } from 'shared/ui/Icons'
+import { LetterIcon, LockIcon } from 'shared/ui/Icons'
 import { WithIconInput } from 'shared/ui'
 import styles from './auth.scss'
 import { AuthModel } from '../model'
-import { UserModel } from 'shared/model'
 import { observer } from 'mobx-react-lite'
 
 interface SignupFormProps extends React.HTMLProps<HTMLDivElement> {
@@ -18,11 +17,10 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // UserModel.signup(data)
+    AuthModel.signup()
     props.onButtonClick?.()
   }
 
-  console.log(AuthModel.isConfirmed)
   return (
     <div {...rest}>
       <form
@@ -46,7 +44,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
             onChange={({ currentTarget: { value } }) =>
               AuthModel.setPassword(value)
             }
-            danger={AuthModel.isConfirmed}
+            danger={AuthModel.isSignUpButtonDisabled}
             value={AuthModel.password}
           />
           <WithIconInput
@@ -56,7 +54,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
             onChange={({ currentTarget: { value } }) =>
               AuthModel.setConfirmedPassword(value)
             }
-            danger={AuthModel.isConfirmed}
+            danger={AuthModel.isSignUpButtonDisabled}
             value={AuthModel.confirmedPassword}
           />
           <span className={styles.policy}>
@@ -68,7 +66,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
         <BlueButton
           type="wide"
           value="Зарегистрироваться"
-          disabled={!AuthModel.isConfirmed}
+          disabled={AuthModel.isSignUpButtonDisabled}
         />
       </form>
     </div>
