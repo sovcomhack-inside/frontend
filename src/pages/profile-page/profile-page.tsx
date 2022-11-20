@@ -3,12 +3,12 @@ import classNames from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { UserModel } from 'shared/model'
-import { Tabs } from 'shared/ui'
 import { UserBankAccountInfo } from 'widgets'
 import s from './profile-page.scss'
 import { ButtonsBlock } from './ui/button-block'
 import { observer } from 'mobx-react-lite'
 import { CurrencyRequest } from 'entities/currency-request'
+import { Tabs } from 'shared/ui/Tabs'
 
 export const ProfilePage: React.FC = observer(() => {
   const tabs = {
@@ -25,7 +25,7 @@ export const ProfilePage: React.FC = observer(() => {
     <div className={classNames(appCss.layout, s.ProfilePage)}>
       <div className={s.wrapper}>
         <Link
-          to={{ pathname: '/scheta' }}
+          to={{ pathname: '/accounts' }}
           className={classNames(appCss.markedText, s.allAccounts)}
         >
           Все счета
