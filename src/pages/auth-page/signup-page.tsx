@@ -4,20 +4,16 @@ import { useNavigate } from 'react-router-dom'
 import { MoniTitle, WithFormPage } from 'shared/ui'
 import styles from './auth.scss'
 import { SignupForm } from 'features/auth'
-import { useTelegram } from 'shared/model'
 import { useState } from 'react'
 import { PassportPage } from 'pages/passport-page'
 
 export const SignupPage: React.FC = () => {
   const [showPassportPage, setShowPassportPage] = useState(false)
   const navigate = useNavigate()
-  const tg = useTelegram()
   const onBackClick = () => {
-    navigate(-1)
-    console.log(tg)
+    setShowPassportPage(false)
+    navigate('/new')
   }
-
-  //
 
   return showPassportPage ? (
     <PassportPage />

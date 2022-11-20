@@ -1,32 +1,28 @@
 import { appCss } from 'app'
 import classNames from 'classnames'
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useState } from 'react'
 import { BlueButton } from 'shared/ui/Button'
 import { LetterIcon, LockIcon, UserIcon } from 'shared/ui/Icons'
 import { WithIconInput } from 'shared/ui'
 import styles from './auth.scss'
+import { AuthModel } from '../model'
+import { UserModel } from 'shared/model'
+import { observer } from 'mobx-react-lite'
 
 interface SignupFormProps extends React.HTMLProps<HTMLDivElement> {
   onButtonClick?: () => void
 }
 
-export const SignupForm: React.FC<SignupFormProps> = (props) => {
+export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
   const { className, ...rest } = props
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const [name, second] = e.currentTarget.username.value.split(' ')
-    const data = {
-      firstName: name,
-      lastName: second,
-      email: e.currentTarget.email.value,
-      password: e.currentTarget.password.value,
-    }
-    // AuthApi.signUp(data)
-    console.log(data)
+    // UserModel.signup(data)
     props.onButtonClick?.()
   }
 
+  console.log(AuthModel.isConfirmed)
   return (
     <div {...rest}>
       <form
@@ -35,26 +31,33 @@ export const SignupForm: React.FC<SignupFormProps> = (props) => {
       >
         <div className={styles.inputs}>
           <WithIconInput
-            icon={<UserIcon />}
-            placeholder="Имя Фамилия"
-            name="username"
-          />
-          <WithIconInput
             type="email"
-            name="email"
             icon={<LetterIcon />}
-            placeholder="Gmail"
+            placeholder="email"
+            value={AuthModel.email}
+            onChange={({ currentTarget: { value } }) =>
+              AuthModel.setEmail(value)
+            }
           />
           <WithIconInput
             type="password"
-            name="password"
             icon={<LockIcon />}
             placeholder="Пароль"
+            onChange={({ currentTarget: { value } }) =>
+              AuthModel.setPassword(value)
+            }
+            danger={AuthModel.isConfirmed}
+            value={AuthModel.password}
           />
           <WithIconInput
             type="password"
             icon={<LockIcon />}
             placeholder="Подтвердить пароль"
+            onChange={({ currentTarget: { value } }) =>
+              AuthModel.setConfirmedPassword(value)
+            }
+            danger={AuthModel.isConfirmed}
+            value={AuthModel.confirmedPassword}
           />
           <span className={styles.policy}>
             By signing up, you agree to{' '}
@@ -65,9 +68,9 @@ export const SignupForm: React.FC<SignupFormProps> = (props) => {
         <BlueButton
           type="wide"
           value="Зарегистрироваться"
-          onClick={props.onButtonClick}
+          disabled={!AuthModel.isConfirmed}
         />
       </form>
     </div>
   )
-}
+})

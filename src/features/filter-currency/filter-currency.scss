@@ -1,0 +1,40 @@
+.FilterCurrency {
+  .FilterPopup {
+    z-index: 20;
+    .FilterOverlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+
+    .FilterContent {
+      position: absolute;
+      bottom: 0;
+
+      width: calc(100% - 44px);
+      padding: 27px 22px 22px 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 1fr);
+      gap: 30px;
+      background: #222222;
+      border-radius: 20px 20px 0px 0px;
+      font-weight: 600;
+      z-index: 3;
+      .sortSwitch {
+        font-size: 10px;
+        color: #6372fb;
+        cursor: pointer;
+      }
+      .horizontalItem {
+        display: flex;
+        justify-content: space-between;
+      }
+      .title {
+        font-weight: bold;
+      }
+    }
+  }
+}

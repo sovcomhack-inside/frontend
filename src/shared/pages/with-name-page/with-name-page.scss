@@ -1,0 +1,25 @@
+.WithNamePage {
+  width: 300px;
+  display: grid;
+  grid-template-rows: 35px max-content;
+  gap: 10px;
+  margin: 0 auto;
+
+  .pageTitle {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .name {
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+  .underName {
+    font-weight: 600;
+    font-size: 14px;
+    color: #ffffff50;
+  }
+}

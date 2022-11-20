@@ -11,7 +11,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
   const [active, setActive] = useState<string | null>(null)
 
   useEffect(() => {
-    setActive(Object.keys(props.tabs)[0])
+    setActive(active == null ? Object.keys(props.tabs)[0] : active)
   }, [props.tabs])
 
   const [_, component] = Object.entries(props.tabs).find(
@@ -23,7 +23,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
       <div className={s.titlesContainer}>
         {Object.keys(props.tabs).map((title) => (
           <span
-            className={classNames(s.title, { [s.isActive]: title === active })}
+            className={classNames(s.title, { [s.isActive]: active == title })}
             onClick={() => setActive(title)}
           >
             {title}

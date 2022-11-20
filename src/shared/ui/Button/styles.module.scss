@@ -8,6 +8,10 @@
   color: #000;
   transition: all 0.07s;
 
+  &:disabled {
+    background: #1e224b !important;
+  }
+
   svg,
   path {
     fill: inherit !important;
@@ -16,8 +20,8 @@
 }
 
 .Button.blue {
-  background: #6372fb !important;
-  color: #fff !important;
+  background: #6372fb;
+  color: #fff;
 
   &:hover {
     background: #6372fb70;
@@ -41,7 +45,8 @@
   }
 }
 
-.Button.wide {}
+.Button.wide {
+}
 
 .Button.square {
   width: 40px;

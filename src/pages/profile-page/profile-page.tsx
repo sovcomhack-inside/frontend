@@ -2,15 +2,23 @@ import { appCss } from 'app'
 import classNames from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Tabs } from 'shared/ui/Tabs'
+import { UserModel } from 'shared/model'
 import { UserBankAccountInfo } from 'widgets'
 import s from './profile-page.scss'
 import { ButtonsBlock } from './ui/button-block'
+import { observer } from 'mobx-react-lite'
+import { CurrencyRequest } from 'entities/currency-request'
+import { Tabs } from 'shared/ui/Tabs'
 
-export const ProfilePage: React.FC = () => {
+export const ProfilePage: React.FC = observer(() => {
   const tabs = {
-    события: <>События</>,
-    'активные заявки': <>Currency List</>,
+    'активные заявки': (
+      <>
+        {UserModel.requests.map((request) => (
+          <CurrencyRequest request={request} />
+        ))}
+      </>
+    ),
   }
 
   return (
@@ -26,10 +34,10 @@ export const ProfilePage: React.FC = () => {
       <div className={s.wrapper}>
         <UserBankAccountInfo />
       </div>
-      <div className={s.buttons}>
+      <div className={s.buttons} onClick={UserModel.remove}>
         <ButtonsBlock />
       </div>
       <Tabs containerClass={s.Tabs} tabs={tabs} />
     </div>
   )
-}
+})

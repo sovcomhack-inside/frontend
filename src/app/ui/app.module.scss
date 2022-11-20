@@ -52,3 +52,11 @@ p {
 
   color: $white;
 }
+
+.WithMenuComponent {
+  display: grid;
+  grid-template-rows: max-content 90px;
+  align-content: space-between;
+  height: 100vh;
+  row-gap: 50px;
+}

@@ -1,0 +1,29 @@
+.Page {
+  width: 300px;
+  padding-top: 20px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 50px max-content;
+  .topBar {
+    display: flex;
+    align-items: center;
+    .pageTitle {
+      justify-self: center;
+      margin: 0 auto;
+    }
+  }
+  .button {
+    width: 0px;
+    height: 40px;
+    position: relative;
+    background: none !important;
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 40%;
+      margin-right: -50%;
+      fill: #fff !important;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

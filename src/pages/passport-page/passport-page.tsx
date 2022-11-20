@@ -1,3 +1,4 @@
+import { SignupPage } from 'pages/auth-page'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DonePage } from 'shared/pages'
@@ -11,6 +12,7 @@ export const PassportPage: React.FC<any> = () => {
   const [step, setStep] = useState(PassportSteps.MANUAL_TYPE)
 
   const mapByStep: Record<string, JSX.Element> = {
+    [PassportSteps.START]: <SignupPage />,
     [PassportSteps.MANUAL_TYPE]: (
       <ManualStep
         nextStep={() => setStep(PassportSteps.PHONE)}

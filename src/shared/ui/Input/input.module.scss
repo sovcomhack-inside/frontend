@@ -37,6 +37,10 @@ input:-internal-autofill-selected {
   }
 }
 
+.danger {
+  border-color: red;
+}
+
 .WithTitleInput {
   display: flex;
   flex-direction: column;

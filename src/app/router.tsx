@@ -8,6 +8,10 @@ import { AdminLoginPage } from 'pages/admin/admin-page'
 import { AdminManagePage } from 'pages/admin/admin-manage'
 import { CardsPage } from 'pages/cards/cards-page'
 import { CardsNewPage } from 'pages/cards/cards-new-page'
+import { CurrenciesList } from 'widgets'
+import { WithNamePage } from 'shared/pages/with-name-page'
+import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
+import { CurrencyPage } from 'pages/currency-page'
 
 export const router = createBrowserRouter([
   {
@@ -53,5 +57,19 @@ export const router = createBrowserRouter([
   {
     path: '/cards/new',
     element: <CardsNewPage />,
+    path: '/shop',
+    element: (
+      <WithMenuComponent>
+        <WithBackbuttonPage pageTitle="О валюте">
+          <WithNamePage name="Валюты">
+            <CurrenciesList />
+          </WithNamePage>
+        </WithBackbuttonPage>
+      </WithMenuComponent>
+    ),
+  },
+  {
+    path: '/currency/:id',
+    element: <CurrencyPage />,
   },
 ])

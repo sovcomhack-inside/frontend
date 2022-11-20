@@ -3,22 +3,25 @@ import React from 'react'
 export const PageIcon = () => {
   return (
     <svg
-      width="18"
-      height="24"
-      viewBox="0 0 18 24"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <path d="M13.1248 9.375H6.87484V10.625H13.1248V9.375Z" fill="white" />
       <path
-        d="M13.0833 11.4166H4.91667V12.5833H13.0833V11.4166Z"
+        d="M6.87484 6.04167H11.4582V7.29167H6.87484V6.04167Z"
         fill="white"
       />
-      <path d="M4.91667 6.74996H10.75V7.91663H4.91667V6.74996Z" fill="white" />
-      <path d="M13.0833 16.0833H4.91667V17.25H13.0833V16.0833Z" fill="white" />
+      <path
+        d="M13.1248 12.7083H6.87484V13.9583H13.1248V12.7083Z"
+        fill="white"
+      />
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
-        d="M12.7416 0.916626H0.25V23.0833H17.75V5.925L12.7416 0.916626ZM1.41667 21.9166V2.08329H12.2584L16.5833 6.40825V21.9166H1.41667Z"
+        d="M12.7587 1.875H3.5415V18.125H16.4582V5.57445L12.7587 1.875ZM4.7915 16.875V3.125H12.241L15.2082 6.09222V16.875H4.7915Z"
         fill="white"
       />
     </svg>
