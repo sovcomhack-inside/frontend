@@ -34,7 +34,7 @@ export const AccountsPage: React.FC = () => {
       </div>
       <Link
         to={{ pathname: '/accounts/new' }}
-        className='text-lg bg-neutral-900 p-6 rounded-md text-center hover:bg-neutral-800'
+        className='text-lg text-white bg-neutral-900 p-6 rounded-md text-center hover:bg-neutral-800'
       >
         Новый валютный счет
       </Link>
