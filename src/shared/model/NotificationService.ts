@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 window.addEventListener('unhandledrejection', (e) => {
-  console.log(e)
+  NotificationService.error(e.reason.message)
 })
 
 class _NotificationService {
@@ -14,12 +14,20 @@ class _NotificationService {
     makeAutoObservable(this)
   }
 
+  private clear() {
+    this.show = false
+    this.type = null
+    this.description = null
+    this.message = null
+  }
+
   error = (message: string = 'Ошибка', description?: string) => {
     this.show = true
     this.message = message
     this.description = description
+    this.type = 'error'
     const timer = setTimeout(() => {
-      this.show = false
+      this.clear()
     }, 5000)
   }
 
@@ -27,8 +35,9 @@ class _NotificationService {
     this.show = true
     this.message = message
     this.description = description
+    this.type = 'success'
     const timer = setTimeout(() => {
-      this.show = false
+      this.clear()
     }, 5000)
   }
 }

@@ -8,13 +8,17 @@ import CurrencyFlag from 'react-currency-flags'
 
 import s from './buy-currency-page.scss'
 import { WhiteButton, WithTitleInput } from 'shared/ui'
+import { CurrencyListModel } from 'widgets/currencies-list/model/CurrencyListModel'
+import { NotificationService } from 'shared/model/NotificationService'
+import { observer } from 'mobx-react-lite'
 
 interface BuyCurrencyPageProps {}
 
-export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = () => {
+export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()
   const params = useParams()
-  const pageName = params.id?.toUpperCase() ?? 'USD' // TODO: UserModel
+  const currency = CurrencyListModel.findByCode(params?.id ?? '')
+  const pageName = currency?.code
   const [amount, setAmount] = useState(0)
 
   const account = {
@@ -28,11 +32,10 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = () => {
     code: 'RUB',
   }
 
-  const currency = {
-    name: 'Доллар США',
-    code: 'USD',
-    price: 61.02,
-    desc: 'Цена последней сделки',
+  if (!currency) {
+    NotificationService.success('Валюта не найдена')
+    nav('/currencies')
+    return <></>
   }
 
   return (
@@ -50,7 +53,7 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = () => {
             icon={<CurrencyFlag currency={currency.code} size="md" />}
             leftTop={currency.name}
             rightTop={currency.price}
-            rightBottom={currency.desc}
+            rightBottom={'Цена последней сделки'}
           />
         </div>
         <div className={s.buyForm}>
@@ -78,4 +81,4 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = () => {
       </WithNamePage>
     </WithBackbuttonPage>
   )
-}
+})

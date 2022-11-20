@@ -6,11 +6,9 @@ import {
   makeAutoObservable,
   action,
 } from 'mobx'
-import {
-  AuthService,
-  UserLoginApi,
-  UserSignupApi,
-} from 'shared/api/authorization-service'
+import { fetchAPI } from 'shared/api'
+import { NotificationService } from './NotificationService'
+import { FetchStatuses } from './types'
 
 type RequestStatus = 'Заявка создана' | 'В обработке'
 
@@ -27,72 +25,66 @@ export interface CurrencyRequest {
   status: RequestStatus
 }
 
+export interface UserAccountApi {
+  number: string
+  user_id: string
+  currency: string
+  cents: number
+  created_at: string
+}
+
+export interface IUserAccount {
+  number: string
+  userId: string
+  currency: string
+  cents: number
+  createdAt: string
+}
+
 export interface IUserModel {
   firstName: string
   lastName: string
   email: string
-  requests: CurrencyRequest[]
+  id: number
 }
 
-class _UserModel implements IUserModel {
+class _UserModel implements Omit<IUserModel, 'id'> {
+  id: number | null = null
   firstName: string = ''
   lastName: string = ''
   email: string = ''
-  requests: CurrencyRequest[] = [
-    {
-      code: 'USD',
-      name: 'Доллар США',
-      retail: {
-        price: '59.03 ₽',
-        total: '+42.00 $',
-        type: 'Покупка',
-      },
-      status: 'В обработке',
-    },
-    {
-      code: 'USD',
-      name: 'Доллар США',
-      retail: {
-        price: '59.03 ₽',
-        total: '+42.00 $',
-        type: 'Продажа',
-      },
-      status: 'Заявка создана',
-    },
-  ]
-
-  status: 'idle' | 'fetch' | 'failed' | 'done' = 'idle'
+  status: FetchStatuses = FetchStatuses.idle
+  _accounts: IUserAccount[] | null = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
+  private _fetchAccounts = async () => {
+    this.status = FetchStatuses.fetch
+    const data: UserAccountApi[] = await fetchAPI.get('/currencies/list')
+    const formattedData: IUserAccount[] = data.map((d) => ({
+      cents: d.cents,
+      createdAt: d.created_at,
+      currency: d.currency,
+      number: d.number,
+      userId: d.user_id,
+    }))
+    this._accounts = formattedData
+    this.status = FetchStatuses.idle
+  }
+
+  @computed
+  get accounts(): IUserAccount[] | null {
+    if (this._accounts) {
+      return this._accounts
+    }
+    this._fetchAccounts()
+    return this._accounts
+  }
+
   @action
   public remove = () => {}
-
-  private _signup = async (data: UserSignupApi) => {
-    this.status = 'idle'
-    this.status = 'fetch'
-    const response = await AuthService.signup(data)
-    console.log(response)
-    this.status = 'done'
-    this.email = data.email
-  }
-  public signup = (data: UserSignupApi) => {
-    this._signup(data)
-  }
-
-  private _login = async (data: UserLoginApi) => {
-    this.status = 'idle'
-    this.status = 'fetch'
-    const response = await AuthService.login(data)
-    console.log(response)
-    this.status = 'done'
-    this.email = data.email
-  }
-  public login = (data: UserLoginApi) => {
-    this._login(data)
-  }
 }
 
 export const UserModel = new _UserModel()

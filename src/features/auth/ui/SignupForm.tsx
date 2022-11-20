@@ -18,7 +18,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     AuthModel.signup()
-    // props.onButtonClick?.()
+    props.onButtonClick?.()
   }
 
   return (

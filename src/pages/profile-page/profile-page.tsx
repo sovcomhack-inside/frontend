@@ -7,20 +7,8 @@ import { UserBankAccountInfo } from 'widgets'
 import s from './profile-page.scss'
 import { ButtonsBlock } from './ui/button-block'
 import { observer } from 'mobx-react-lite'
-import { CurrencyRequest } from 'entities/currency-request'
-import { Tabs } from 'shared/ui/Tabs'
 
 export const ProfilePage: React.FC = observer(() => {
-  const tabs = {
-    'активные заявки': (
-      <>
-        {UserModel.requests.map((request) => (
-          <CurrencyRequest request={request} />
-        ))}
-      </>
-    ),
-  }
-
   return (
     <div className={classNames(appCss.layout, s.ProfilePage)}>
       <div className={s.wrapper}>
@@ -34,10 +22,10 @@ export const ProfilePage: React.FC = observer(() => {
       <div className={s.wrapper}>
         <UserBankAccountInfo />
       </div>
-      <div className={s.buttons} onClick={UserModel.remove}>
+      <div className={s.buttons}>
         <ButtonsBlock />
       </div>
-      <Tabs containerClass={s.Tabs} tabs={tabs} />
+      {/* <Tabs containerClass={s.Tabs} tabs={tabs} /> */}
     </div>
   )
 })

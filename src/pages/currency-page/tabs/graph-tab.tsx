@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { BlueButton, WhiteButton } from 'shared/ui'
 import { Graph, GraphProps } from 'shared/ui/graph'
@@ -28,6 +29,7 @@ interface GraphTabProps {
 }
 
 export const GraphTab: React.FC<GraphTabProps> = (props) => {
+  const nav = useNavigate()
   const graphProps: GraphProps = {
     yOrientation: 'right',
     width: 320,
@@ -66,7 +68,7 @@ export const GraphTab: React.FC<GraphTabProps> = (props) => {
       </div>
       <div className={s.buttons}>
         <BlueButton value={'Торгуем за вас'} />
-        <WhiteButton value={'Купить'} />
+        <WhiteButton value={'Купить'} onClick={() => nav('/buy')} />
       </div>
     </div>
   )
