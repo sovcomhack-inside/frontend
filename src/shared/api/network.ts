@@ -9,7 +9,7 @@ export const httpStatus = {
   InternalServerError: 500,
 }
 
-export const BASE_URL = 'http://127.0.0.1/api/v1'
+export const BASE_URL = '/api/v1'
 
 export const httpMethod = {
   GET: 'GET',

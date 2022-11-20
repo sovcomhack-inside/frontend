@@ -10,9 +10,11 @@ import { BookIcon } from 'shared/ui/Icons/BookIcon'
 import { CancelIcon } from 'shared/ui/Icons/CancelIcon'
 import { EyeIcon } from 'shared/ui/Icons/EyeIcon'
 import { KeyIcon } from 'shared/ui/Icons/KeyIcon'
+import TelegramLoginButton from 'react-telegram-login';
 import s from './settings-page.scss'
+import { UserModel } from 'shared/model'
 
-interface SettingsPageProps {}
+interface SettingsPageProps { }
 
 export const SettingsPage: React.FC<SettingsPageProps> = () => {
   return (
@@ -49,6 +51,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = () => {
             title="Выход"
             icon={<CancelIcon />}
           />
+          <TelegramLoginButton buttonSize="medium" requestAccess="write" dataAuthUrl={`/api/v1/oauth/telegram/${UserModel.id}`} botName="sovcomhack_inside_bot" />
         </div>
       </WithNamePage>
     </WithMenuComponent>

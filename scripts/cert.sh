@@ -1,6 +1,6 @@
 #!/bin/bash
 
-domains=(sovcom-moni.ru )
+domains=(sovcom-moni.ru)
 rsa_key_size=4096
 data_path="./certbot"
 email="" # Adding a valid address is strongly recommended
