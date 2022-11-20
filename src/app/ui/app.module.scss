@@ -1,6 +1,46 @@
 $white: #fff;
 $blue: #6372fb;
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  text-rendering: optimizeSpeed;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @font-face {
   font-family: 'Averta';
   src: url('./fonts/AvertaCY-Regular.ttf') format('truetype');
@@ -68,6 +108,7 @@ p {
   padding: 25px 15px;
   background: #252525;
   border-radius: 5px;
+
   &.error {
     .title {
       color: red;
@@ -78,6 +119,7 @@ p {
     font-weight: bold;
     font-size: 14px;
   }
+
   .subTitle {
     font-size: 12px;
   }
