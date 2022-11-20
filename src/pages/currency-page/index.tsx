@@ -8,21 +8,19 @@ import { WithMenuComponent } from 'app/ui/WithMenuComponent'
 import { WithNamePage } from 'shared/pages/with-name-page'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CurrencyModel } from 'widgets'
+import { observer } from 'mobx-react-lite'
 
 export interface CurrencyPageProps {}
 
-export const CurrencyPage: React.FC<CurrencyPageProps> = () => {
+export const CurrencyPage: React.FC<CurrencyPageProps> = observer(() => {
   const nav = useNavigate()
   const params = useParams()
   const currency = CurrencyModel.findByCode(params.id)
   const tabs = {
-    купить: (
-      <GraphTab
-        graphTabClass={s.graphTab}
-        price={currency?.price}
-        percent={currency?.percent}
-        code={params.id}
-      />
+    купить: currency ? (
+      <GraphTab graphTabClass={s.graphTab} currency={currency} />
+    ) : (
+      <div>Валюты нет</div>
     ),
   }
 
@@ -40,4 +38,4 @@ export const CurrencyPage: React.FC<CurrencyPageProps> = () => {
       </WithBackbuttonPage>
     </WithMenuComponent>
   )
-}
+})

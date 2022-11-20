@@ -33,7 +33,7 @@ export class _AuthorizationServiceImpl implements AuthorizationService {
     return fetchAPI.post('/auth/login', data)
   }
   logout(): Promise<void> {
-    return fetchAPI.post('/auth/logout', {})
+    return fetchAPI.delete('/auth/logout', {})
   }
   getUser(): Promise<User> {
     return fetchAPI.get('/user/get', {})

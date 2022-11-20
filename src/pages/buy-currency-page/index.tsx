@@ -13,7 +13,7 @@ import { observer } from 'mobx-react-lite'
 import { UserModel } from 'shared/model'
 import { CurrencyModel } from 'widgets'
 
-interface BuyCurrencyPageProps { }
+interface BuyCurrencyPageProps {}
 
 export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()
@@ -58,12 +58,16 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
             containerClass={s.containerClass}
             icon={<CurrencyFlag currency={currency.code} size="md" />}
             leftTop={currency.name}
-            rightTop={currency.price}
+            rightTop={currency.currentPrice}
             rightBottom={'Цена последней сделки'}
           />
         </div>
         <div className={s.buyForm}>
-          <WithTitleInput title={'По цене'} value={currency.price} disabled />
+          <WithTitleInput
+            title={'По цене'}
+            value={currency.currentPrice}
+            disabled
+          />
           <WithTitleInput
             title={'Количество'}
             type={'number'}
@@ -75,7 +79,7 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
         </div>
         <div className={s.total}>
           <span>Итого</span>
-          <span>{currency.price * amount} ₽</span>
+          <span>{currency.currentPrice * amount} ₽</span>
         </div>
         <div className={s.button}>
           <WhiteButton value={'Купить сейчас'} />

@@ -13,11 +13,7 @@ export const SmsStep: React.FC<WithSetStep> = (props) => {
           title={<span className={styles.inputTitle}>Цифры из SMS</span>}
           onChange={({ currentTarget: { value } }) => setValue(value)}
         />
-        <WhiteButton
-          disabled={value.length !== 4}
-          value="Подписать"
-          onClick={props.nextStep}
-        />
+        <WhiteButton value="Подписать" onClick={props.nextStep} />
       </div>
     )
   }

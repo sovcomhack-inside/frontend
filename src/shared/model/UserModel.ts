@@ -4,6 +4,7 @@ import {
   UserAccountApi,
   UserService,
 } from 'shared/api/UserService/UserService'
+import { CurrencyModel } from 'widgets'
 import { FetchStatuses } from './types'
 
 type RequestStatus = 'Заявка создана' | 'В обработке'
@@ -70,7 +71,10 @@ class _UserModel {
     return this.accounts?.find((acc) => acc.currency === code)
   }
 
-  public createAccount = async (code: string) => {
+  public createAccount = async (code: string | null) => {
+    if (code == null) {
+      throw new Error('Selected code is null')
+    }
     const newAcc: UserAccountApi = await UserService.createAccount({
       currency: code,
     })

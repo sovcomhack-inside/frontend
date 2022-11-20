@@ -16,11 +16,7 @@ export const PhoneStep: React.FC<WithSetStep> = observer((props) => {
           type="phone"
           onChange={({ currentTarget: { value } }) => AuthModel.setPhone(value)}
         />
-        <WhiteButton
-          disabled={AuthModel.phone.length !== 11}
-          value="Подписать"
-          onClick={props.nextStep}
-        />
+        <WhiteButton value="Подписать" onClick={props.nextStep} />
       </div>
     )
   }
