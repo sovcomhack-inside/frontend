@@ -12,7 +12,7 @@ import { CurrencyListModel } from 'widgets/currencies-list/model/CurrencyListMod
 import { NotificationService } from 'shared/model/NotificationService'
 import { observer } from 'mobx-react-lite'
 
-interface BuyCurrencyPageProps {}
+interface BuyCurrencyPageProps { }
 
 export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()

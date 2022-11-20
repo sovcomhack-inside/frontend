@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BackButton } from 'shared/ui'
 import { Link, useNavigate } from "react-router-dom";
-import '../../index.css'
+import '../../input.css'
 import { Card } from 'pages/cards/types';
 
 export const CardsPage: React.FC = () => {

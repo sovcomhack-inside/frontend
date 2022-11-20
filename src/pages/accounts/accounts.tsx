@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BackButton } from 'shared/ui'
 import { Link, useNavigate } from "react-router-dom";
 import { Account } from 'pages/accounts/types';
-import '../../index.css'
+import '../../input.css';
 
 export const AccountsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -26,8 +26,8 @@ export const AccountsPage: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col w-80 mx-auto gap-4'>
-      <BackButton onClick={() => navigate("/profile")} />
+    <div className='flex flex-col w-80 mx-auto gap-12 mt-8'>
+      <BackButton className='w-16 float-left' onClick={() => navigate("/profile")} />
       <div className='text-4xl font-bold'>Мои счета</div>
       <div className='flex flex-col gap-2 h-1/4 overflow-hidden'>
         {accounts?.map(mapAccount)}

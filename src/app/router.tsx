@@ -14,6 +14,7 @@ import { AdminManagePage } from 'pages/admin/admin-manage'
 import { AccountsPage } from 'pages/accounts/accounts'
 import { BuyCurrencyPage } from 'pages/buy-currency-page'
 import { SettingsPage } from 'pages/settings-page'
+import { AccountsNewPage } from 'pages/accounts/accounts-new-page'
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
   {
     path: '/accounts',
     element: <AccountsPage />,
+  },
+  {
+    path: '/accounts/new',
+    element: <AccountsNewPage />,
   },
   {
     path: '/admin/login',

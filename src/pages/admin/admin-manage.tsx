@@ -1,11 +1,8 @@
 import { User } from 'features/auth/api/types'
 import React, { FormEvent } from 'react'
-import { useAsyncValue } from 'react-router-dom'
-import { fetchAPI, withQuery } from 'shared/api/network'
-import { UserModel } from 'shared/model'
+import { fetchAPI } from 'shared/api/network'
 import { Input, WhiteButton } from 'shared/ui'
-import { Button } from 'shared/ui/Button/style.module.scss'
-import '../../index.css'
+import '../../input.css'
 
 interface LoginFormProps extends React.HTMLProps<HTMLDivElement> {
   onButtonClick?: () => void
