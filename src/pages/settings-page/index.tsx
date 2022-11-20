@@ -12,7 +12,7 @@ import { EyeIcon } from 'shared/ui/Icons/EyeIcon'
 import { KeyIcon } from 'shared/ui/Icons/KeyIcon'
 import s from './settings-page.scss'
 
-interface SettingsPageProps {}
+interface SettingsPageProps { }
 
 export const SettingsPage: React.FC<SettingsPageProps> = () => {
   return (
@@ -49,6 +49,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = () => {
             title="Выход"
             icon={<CancelIcon />}
           />
+          <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-login="ovcomhack_inside_bot" data-size="medium" data-userpic="false" data-auth-url="/api/v1/oauth/telegram" data-request-access="write"></script>
         </div>
       </WithNamePage>
     </WithMenuComponent>
