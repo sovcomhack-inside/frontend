@@ -759,5 +759,13 @@ module.exports = function (webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
+    devServer: {
+      compress: false,
+      host: "0.0.0.0",
+      port: 3000,
+    },
+    watchOptions: {
+      poll: 1000,
+    }
   }
 }
