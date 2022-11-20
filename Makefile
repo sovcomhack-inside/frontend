@@ -9,13 +9,10 @@ DOCKER_BUILD_KIT:=COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
 
 production: cleanup build docker-production
 
-dev: docker-dev-down docker-dev-up
+dev: docker-dev-down cleanup build docker-dev-up
 
 build:
 	npm run build
-
-start:
-	npm run start
 
 docker-production: docker-production-down docker-production-build docker-production-up
 
