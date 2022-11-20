@@ -12,7 +12,7 @@ export const HistoryPage: React.FC = observer(() => {
     <WithBackbuttonPage onClick={() => nav('/profile')}>
       <div className={s.items}>
         {UserModel.history?.map((oper) => (
-          <div className={s.Item}>
+          <div className={s.item}>
             <span className={s.purpose}>{oper.purpose}</span>
             <span className={s.before}>Было: {oper.amount_cents_from}</span>
             <span className={s.after}>Стало: {oper.amount_cents_to}</span>

@@ -125,6 +125,17 @@ class _UserModel {
     return this.operations
   }
 
+  async buy() {
+    await UserService.buyAccount({
+      currency_from: 'RUB',
+      currency_to: 'USD',
+      account_number_from: 'USD',
+      account_number_to: 'RUB',
+      desired_amount_cents: 50,
+    })
+    NotificationService.success()
+  }
+
   @computed get mainAccount() {
     return this.accounts?.find((acc) => acc.number === this.mainAccountNumber)
   }

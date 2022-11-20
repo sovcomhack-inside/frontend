@@ -21,7 +21,7 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const pageName = currency?.code
   const [amount, setAmount] = useState(0)
 
-  const account = UserModel.getAccountByCode(currency?.code)
+  const account = UserModel.getAccountByCode('RUB')
 
   if (!currency) {
     if (!currency) {
@@ -81,7 +81,10 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
           <span>{currency.currentPrice * amount} ₽</span>
         </div>
         <div className={s.button}>
-          <WhiteButton value={'Купить сейчас'} />
+          <WhiteButton
+            onClick={() => UserModel.buy()}
+            value={'Купить сейчас'}
+          />
         </div>
       </WithNamePage>
     </WithBackbuttonPage>

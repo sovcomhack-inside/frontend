@@ -33,13 +33,13 @@ class _NotificationService {
   }
 
   success = (message: string = 'Успешно', description?: string) => {
-// this.show = true
-// this.message = message
-// this.description = description
-// this.type = 'success'
-// const timer = setTimeout(() => {
-//   this.clear()
-// }, 5000)
+    this.show = true
+    this.message = 'Платеж прошёл'
+    this.description = description
+    this.type = 'success'
+    const timer = setTimeout(() => {
+      this.clear()
+    }, 5000)
   }
 }
 

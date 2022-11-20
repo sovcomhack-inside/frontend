@@ -23,7 +23,6 @@ export const Currency: React.FC<CurrencyProps> = observer(
       props.onClick(currency.code)
     }
 
-    console.log(currency.code)
     return (
       <CurrencyTemplate
         onClick={onClick}

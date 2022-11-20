@@ -1,12 +1,13 @@
 import { appCss } from 'app'
 import classNames from 'classnames'
+import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { UserModel } from 'shared/model'
 import s from './user-bank-acount-info.scss'
 
 // TODO: Функция для преобразований чисел (Intl)
 
-export const UserBankAccountInfo = () => {
+export const UserBankAccountInfo = observer(() => {
   return (
     <div className={s.UserBankAccountInfo}>
       <span className={s.totalAmount}>{UserModel.mainAccount?.balance} ₽</span>
@@ -25,4 +26,4 @@ export const UserBankAccountInfo = () => {
       </div>
     </div>
   )
-}
+})

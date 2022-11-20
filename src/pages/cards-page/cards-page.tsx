@@ -48,7 +48,10 @@ export const CardsPage: React.FC = () => {
             <WhiteButton
               className={s.button}
               value="Пополнить"
-              onClick={() => UserModel.depositMoney(Number(summ))}
+              onClick={() => {
+                UserModel.depositMoney(Number(summ))
+                navigate('/profile')
+              }}
             />
           </div>
         )}
