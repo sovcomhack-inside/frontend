@@ -3,15 +3,15 @@ import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage, MainPage, SignupPage } from 'pages/auth-page'
 import { WithMenuComponent } from './ui/WithMenuComponent'
 import { ProfilePage } from 'pages'
-import { AccountsPage } from 'pages/accounts/accounts'
 import { AdminLoginPage } from 'pages/admin/admin-page'
-import { AdminManagePage } from 'pages/admin/admin-manage'
 import { CardsPage } from 'pages/cards/cards-page'
 import { CardsNewPage } from 'pages/cards/cards-new-page'
 import { CurrenciesList } from 'widgets'
 import { WithNamePage } from 'shared/pages/with-name-page'
 import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { CurrencyPage } from 'pages/currency-page'
+import { AdminManagePage } from 'pages/admin/admin-manage'
+import { AccountsPage } from 'pages/accounts/accounts'
 
 export const router = createBrowserRouter([
   {
