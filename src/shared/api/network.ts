@@ -19,11 +19,11 @@ export const httpMethod = {
 }
 
 const defaultOptions: RequestInit = {
-  mode: "same-origin",
-  credentials: "same-origin",
+  mode: 'same-origin',
+  credentials: 'same-origin',
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
 }
 
@@ -79,7 +79,7 @@ const http = async <T>(url: string, config: RequestInit): Promise<T> => {
   })
   const response = await fetch(request)
   if (!response.ok) {
-    throw new Error(response.statusText);
+    throw new Error(response.statusText)
   }
   return response.json().then(decodeJSON)
 }

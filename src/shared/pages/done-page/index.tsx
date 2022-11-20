@@ -5,6 +5,7 @@ import styles from './done-page.scss'
 
 interface DonePageProps extends PropsWithChildren {
   buttonTitle?: string
+  icon?: JSX.Element
   mainText: string
   secondaryText: string
   onDonebuttonClick?: () => void
@@ -13,7 +14,7 @@ interface DonePageProps extends PropsWithChildren {
 export const DonePage: React.FC<DonePageProps> = (props) => {
   return (
     <div className={styles.DonePage}>
-      <CheckboxIcon />
+      {props.icon ?? <CheckboxIcon />}
       <span className={styles.mainText}>{props.mainText}</span>
       <span className={styles.secondaryText}>{props.secondaryText}</span>
       <WhiteButton

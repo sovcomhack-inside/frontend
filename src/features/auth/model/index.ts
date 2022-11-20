@@ -1,6 +1,10 @@
 import { computed, makeAutoObservable, observable } from 'mobx'
 import { AuthorizationService, fetchAPI } from 'shared/api'
-import { AuthService, UserSignupApi } from 'shared/api/authorization-service'
+import {
+  AuthService,
+  UserLoginApi,
+  UserSignupApi,
+} from 'shared/api/authorization-service'
 import { IUserModel, UserModel } from 'shared/model'
 
 class PassportModel {
@@ -42,6 +46,7 @@ export class _AuthModel {
   confirmedPassword: string = ''
   phone: string = ''
 
+  status: 'idle' | 'fetch' | 'failed' | 'done' = 'idle'
   passport
 
   @computed
@@ -49,8 +54,13 @@ export class _AuthModel {
     return this.phone.startsWith('+') ? this.phone : `+${this.phone}`
   }
 
-  @computed get isConfirmed(): boolean {
-    return this.password === this.confirmedPassword
+  @computed get isSignUpButtonDisabled(): boolean {
+    return (
+      this.password === this.confirmedPassword &&
+      !this.email &&
+      this.password.length >= 2 &&
+      this.confirmedPassword.length >= 2
+    )
   }
 
   constructor() {
@@ -78,6 +88,33 @@ export class _AuthModel {
 
   setPhone = (value: string) => {
     this.phone = value
+  }
+
+  private _signup = async () => {
+    const response = await AuthService.signup({
+      email: this.email,
+      firstName: this.name.split(' ')[0],
+      lastName: this.name.split(' ')[1],
+      password: this.password,
+    })
+    console.log(response)
+    this.status = 'idle'
+  }
+  public signup = () => {
+    this._signup()
+  }
+
+  private _login = async () => {
+    this.status = 'fetch'
+    const response = await AuthService.login({
+      email: this.email,
+      password: this.password,
+    })
+    console.log(response)
+    this.status = 'idle'
+  }
+  public login = () => {
+    this._login()
   }
 }
 

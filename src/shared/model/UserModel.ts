@@ -68,14 +68,13 @@ class _UserModel implements IUserModel {
   }
 
   @action
-  public remove = () => {
-    this.requests.splice(0, 1)
-  }
+  public remove = () => {}
 
   private _signup = async (data: UserSignupApi) => {
     this.status = 'idle'
     this.status = 'fetch'
     const response = await AuthService.signup(data)
+    console.log(response)
     this.status = 'done'
     this.email = data.email
   }
@@ -87,6 +86,7 @@ class _UserModel implements IUserModel {
     this.status = 'idle'
     this.status = 'fetch'
     const response = await AuthService.login(data)
+    console.log(response)
     this.status = 'done'
     this.email = data.email
   }

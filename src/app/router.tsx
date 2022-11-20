@@ -12,6 +12,7 @@ import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { CurrencyPage } from 'pages/currency-page'
 import { AdminManagePage } from 'pages/admin/admin-manage'
 import { AccountsPage } from 'pages/accounts/accounts'
+import { BuyCurrencyPage } from 'pages/buy-currency-page'
 
 export const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ export const router = createBrowserRouter([
     element: <CardsNewPage />,
   },
   {
-    path: '/shop',
+    path: '/currencies',
     element: (
       <WithMenuComponent>
         <WithBackbuttonPage pageTitle="О валюте">
@@ -73,5 +74,9 @@ export const router = createBrowserRouter([
   {
     path: '/currency/:id',
     element: <CurrencyPage />,
+  },
+  {
+    path: '/buy',
+    element: <BuyCurrencyPage />,
   },
 ])
