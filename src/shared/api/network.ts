@@ -9,7 +9,7 @@ export const httpStatus = {
   InternalServerError: 500,
 }
 
-export const BASE_URL = 'http://127.0.0.1:8080/api/v1'
+export const BASE_URL = 'http://127.0.0.1/api/v1'
 
 export const httpMethod = {
   GET: 'GET',
@@ -19,11 +19,11 @@ export const httpMethod = {
 }
 
 const defaultOptions: RequestInit = {
-  mode: 'no-cors',
-  credentials: 'same-origin',
+  mode: "same-origin",
+  credentials: "same-origin",
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
 }
 
@@ -107,7 +107,7 @@ const post = async <T = BasicResponse>(
     body: JSON.stringify(body),
     ...config,
   }
-  return http<T>(url, init)
+  return http<T>(`${BASE_URL}${url}`, init)
 }
 
 const put = async <T>(url: string, body: object, config?: RequestInit) => {

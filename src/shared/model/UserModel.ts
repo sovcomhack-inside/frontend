@@ -86,6 +86,7 @@ class _UserModel implements IUserModel {
   private _login = async (data: UserLoginApi) => {
     this.status = 'idle'
     this.status = 'fetch'
+    console.log("Xxxx")
     const response = await AuthService.login(data)
     this.status = 'done'
     this.email = data.email

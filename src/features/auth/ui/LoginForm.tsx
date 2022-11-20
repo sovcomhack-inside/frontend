@@ -23,7 +23,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
     if (!data.email || !data.password) {
       return
     }
-    // AuthApi.signUp(data)
+
     UserModel.login(data)
     props.onButtonClick?.()
   }
