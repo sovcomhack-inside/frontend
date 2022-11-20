@@ -39,10 +39,10 @@ export const AdminManagePage: React.FC = (props) => {
     fetchAPI.post("/api/v1/admin/update_user_status", { id: response.users[0].id, status: "banned" })
   }
 
-  return <div className='flex flex-col gap-4'>
+  return <div className='flex flex-col gap-8'>
     <div className='flex flex-col mt-8 mx-auto place-items-center h-full gap-2'>
-      <div>Users Pending Approve</div>
-      {unapprovedUsers?.map(mapUser)}
+      <div className='text-lg font-bold'>Неподтвержденные пользователи</div>
+      {unapprovedUsers.length > 0 ? unapprovedUsers?.map(mapUser) : "пусто"}
     </div>
     <div>
       <form className='flex flex-col gap-2 place-items-center' onSubmit={banUser}>

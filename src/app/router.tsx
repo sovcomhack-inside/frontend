@@ -57,6 +57,8 @@ export const router = createBrowserRouter([
   {
     path: '/cards/new',
     element: <CardsNewPage />,
+  },
+  {
     path: '/shop',
     element: (
       <WithMenuComponent>
