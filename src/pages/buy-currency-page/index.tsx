@@ -13,7 +13,7 @@ import { observer } from 'mobx-react-lite'
 import { UserModel } from 'shared/model'
 import { CurrencyModel } from 'widgets'
 
-interface BuyCurrencyPageProps {}
+interface BuyCurrencyPageProps { }
 
 export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()

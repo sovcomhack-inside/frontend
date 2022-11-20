@@ -2,9 +2,8 @@ import React, { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { fetchAPI } from 'shared/api/network'
 import { BlueButton } from 'shared/ui/Button'
-import { LockIcon } from 'shared/ui/Icons'
-import { Input, WithIconInput } from 'shared/ui/Input'
-import '../../index.css'
+import { Input } from 'shared/ui/Input'
+import '../../input.css'
 
 interface LoginFormProps extends React.HTMLProps<HTMLDivElement> {
   onButtonClick?: () => void
@@ -24,7 +23,7 @@ export const AdminForm: React.FC<LoginFormProps> = (props) => {
 
   return (
     <div {...rest}>
-      <form className='flex flex-col place-items-center' onSubmit={onSubmit}>
+      <form className='flex flex-col py-4 place-items-center align-items-center gap-2' onSubmit={onSubmit}>
         <div>
           <Input type="password"
             name="secret"
