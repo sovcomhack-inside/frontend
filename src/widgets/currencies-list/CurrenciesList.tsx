@@ -19,7 +19,6 @@ interface CurrenciesListProps {
 export const CurrenciesList: React.FC<CurrenciesListProps> = observer(
   (props) => {
     const nav = useNavigate()
-    console.log(props.onCurrencyClick)
     return (
       <WithMenuComponent>
         <WithBackbuttonPage onClick={() => nav('/profile')}>
@@ -34,10 +33,6 @@ export const CurrenciesList: React.FC<CurrenciesListProps> = observer(
                   CurrencyModel.list.map((curr) => (
                     <Currency currency={curr} onClick={props.onCurrencyClick} />
                   ))}
-                {CurrencyModel.list &&
-                  CurrencyModel.status === FetchStatuses.fetch && (
-                    <span color={'red'}>'Загрузка'</span>
-                  )}
               </div>
             </div>
           </WithNamePage>

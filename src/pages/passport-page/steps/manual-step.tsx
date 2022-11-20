@@ -11,19 +11,11 @@ import {
 } from 'shared/ui'
 import styles from './steps.scss'
 
-const titles = [
-  'ФИО /// fullName',
-  'Серия и номер /// seriaAndNumber',
-  'Когда выдан /// date',
-  'Кем выдан /// givenBy',
-  'Код подразделения /// code',
-]
-
 export const ManualStep: React.FC<WithSetStep> = observer((props) => {
   const getForm = () => {
     return (
       <div className={styles.ManualStep}>
-        <BlueButton value="Фото паспорта" />
+        <BlueButton value="Фото паспорта *" />
         <WithTitleInput
           value={AuthModel.passport?.fullName}
           onChange={({ currentTarget: { value } }) =>
@@ -63,6 +55,7 @@ export const ManualStep: React.FC<WithSetStep> = observer((props) => {
           value="Готово"
           className={styles.doneButton}
           onClick={props.nextStep}
+          disabled={!(AuthModel.passport.fullName.split(' ').length >= 2)}
         />
         <span className={styles.dataPolicy}>
           Нажимая кнопку “готово” вы соглашаетесь с условиями <br />

@@ -21,6 +21,7 @@ class _CurrencyModel {
   @action
   setSelected(code: string) {
     this.selected = code
+    console.log(this.selected)
   }
 
   @action
@@ -91,7 +92,7 @@ class _CurrencyModel {
     if (this.selected == null) {
       throw new Error('Selected string is null')
     }
-    if (this._data && this._data.code !== this.selected) {
+    if (this._data && this._data.code === this.selected) {
       return this._data
     }
     this._fetchData()
@@ -103,7 +104,6 @@ class _CurrencyModel {
     return this.list?.find((curr) => curr.code === code)
   }
 
-  @computed
   getPoints = () => {
     const res = this.data?.priceData.map(({ date, price }) => {
       return {

@@ -13,7 +13,7 @@ export const PassportPage: React.FC<any> = () => {
   const [step, setStep] = useState(PassportSteps.MANUAL_TYPE)
 
   const onDonebuttonClick = () => {
-    navigator('/profile')
+    navigator('/accounts')
     AuthModel.signup()
   }
 

@@ -72,15 +72,18 @@ class _UserModel {
     return this.accounts?.find((acc) => acc.currency === code)
   }
 
-  public createAccount = async (code: string | null) => {
+  createAccount = async (code: string | null) => {
     if (code == null) {
       throw new Error('Selected code is null')
     }
-    const newAcc: UserAccountApi = await UserService.createAccount({
-      currency: code,
-    })
     this._fetchAccounts()
     NotificationService.success('Успешно')
+  }
+
+  depositMoney = (amount: number) => {
+    const obj = {
+      debit_amount_cents: amount,
+    }
   }
 }
 

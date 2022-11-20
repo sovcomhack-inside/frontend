@@ -8,7 +8,7 @@ export const ButtonsBlock = () => {
   const nav = useNavigate()
   return (
     <div className={s.items}>
-      <div className={classNames(s.item, s.add)}>
+      <div onClick={() => nav('/cards')} className={classNames(s.item, s.add)}>
         <AddIcon />
         <span>Пополнить</span>
       </div>
