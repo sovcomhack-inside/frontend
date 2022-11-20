@@ -1,3 +1,4 @@
+import { AuthModel } from 'features/auth/model'
 import { SignupPage } from 'pages/auth-page'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +11,11 @@ import { PassportSteps } from './types'
 export const PassportPage: React.FC<any> = () => {
   const navigator = useNavigate()
   const [step, setStep] = useState(PassportSteps.MANUAL_TYPE)
+
+  const onDonebuttonClick = () => {
+    navigator('/profile')
+    AuthModel.signup()
+  }
 
   const mapByStep: Record<string, JSX.Element> = {
     [PassportSteps.START]: <SignupPage />,
@@ -36,7 +42,7 @@ export const PassportPage: React.FC<any> = () => {
         buttonTitle="Я готов!"
         mainText="Все готово"
         secondaryText="Самое время подружиться с moni."
-        onDonebuttonClick={() => navigator('/profile')}
+        onDonebuttonClick={onDonebuttonClick}
       />
     ),
   }

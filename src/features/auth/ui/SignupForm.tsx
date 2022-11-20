@@ -17,7 +17,6 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    AuthModel.signup()
     props.onButtonClick?.()
   }
 
@@ -32,6 +31,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
             type="email"
             icon={<LetterIcon />}
             placeholder="email"
+            name="email"
             value={AuthModel.email}
             onChange={({ currentTarget: { value } }) =>
               AuthModel.setEmail(value)
@@ -66,7 +66,7 @@ export const SignupForm: React.FC<SignupFormProps> = observer((props) => {
         <BlueButton
           type="wide"
           value="Зарегистрироваться"
-          disabled={AuthModel.isSignUpButtonDisabled}
+          disabled={!AuthModel.isSignUpButtonDisabled}
         />
       </form>
     </div>

@@ -7,47 +7,53 @@ import { CurrencyTemplate } from 'shared/ui/currency-template'
 import CurrencyFlag from 'react-currency-flags'
 
 import s from './buy-currency-page.scss'
-import { WhiteButton, WithTitleInput } from 'shared/ui'
-import { CurrencyListModel } from 'widgets/currencies-list/model/CurrencyListModel'
+import { BackButton, ButtonBlock, WhiteButton, WithTitleInput } from 'shared/ui'
 import { NotificationService } from 'shared/model/NotificationService'
 import { observer } from 'mobx-react-lite'
+import { UserModel } from 'shared/model'
+import { CurrencyModel } from 'widgets'
 
 interface BuyCurrencyPageProps {}
 
 export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
   const nav = useNavigate()
   const params = useParams()
-  const currency = CurrencyListModel.findByCode(params?.id ?? '')
+  const currency = CurrencyModel.findByCode(params?.id ?? '')
   const pageName = currency?.code
   const [amount, setAmount] = useState(0)
 
-  const account = {
-    name: 'Рублевый счет',
-    balance: Intl.NumberFormat('ru-RU', {
-      currency: 'RUB',
-      style: 'currency',
-      minimumIntegerDigits: 2,
-    }).format(10_000_000_000 / 100),
-    currency: '₽',
-    code: 'RUB',
-  }
+  const account = UserModel.getAccountByCode(currency?.code)
 
   if (!currency) {
-    NotificationService.success('Валюта не найдена')
-    nav('/currencies')
-    return <></>
+    if (!currency) {
+      NotificationService.success('Валюта не найдена')
+    }
+    return (
+      <WithBackbuttonPage onClick={() => nav('/currencies')}>
+        <WithNamePage name={pageName} underName="USDRUB"></WithNamePage>
+      </WithBackbuttonPage>
+    )
   }
 
   return (
-    <WithBackbuttonPage pageTitle="О валюте" onClick={() => nav('/currency')}>
+    <WithBackbuttonPage pageTitle="О валюте" onClick={() => nav('/currencies')}>
       <WithNamePage name={pageName} underName="USDRUB">
         <div className={s.BuyCurrencyPage}>
-          <CurrencyTemplate
-            containerClass={s.containerClass}
-            icon={<CurrencyFlag currency={account.code} size="md" />}
-            leftTop={account.name}
-            rightTop={account.balance}
-          />
+          {account ? (
+            <CurrencyTemplate
+              containerClass={s.containerClass}
+              icon={<CurrencyFlag currency={account.currency} size="md" />}
+              leftTop={account.currency}
+              rightTop={account.balance}
+            />
+          ) : (
+            <CurrencyTemplate
+              containerClass={s.containerClass}
+              icon={<CurrencyFlag currency={currency.code} size="md" />}
+              leftTop={`Открыть ${currency.code} счет`}
+              onClick={() => UserModel.createAccount(currency.code)}
+            />
+          )}
           <CurrencyTemplate
             containerClass={s.containerClass}
             icon={<CurrencyFlag currency={currency.code} size="md" />}
@@ -57,11 +63,7 @@ export const BuyCurrencyPage: React.FC<BuyCurrencyPageProps> = observer(() => {
           />
         </div>
         <div className={s.buyForm}>
-          <WithTitleInput
-            title={'По цене'}
-            value={currency.price}
-            type={'number'}
-          />
+          <WithTitleInput title={'По цене'} value={currency.price} disabled />
           <WithTitleInput
             title={'Количество'}
             type={'number'}

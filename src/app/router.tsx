@@ -7,7 +7,6 @@ import { AdminLoginPage } from 'pages/admin/admin-page'
 import { CardsPage } from 'pages/cards/cards-page'
 import { CardsNewPage } from 'pages/cards/cards-new-page'
 import { CurrenciesList } from 'widgets'
-import { WithNamePage } from 'shared/pages/with-name-page'
 import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { CurrencyPage } from 'pages/currency-page'
 import { AdminManagePage } from 'pages/admin/admin-manage'
@@ -15,7 +14,7 @@ import { AccountsPage } from 'pages/accounts/accounts'
 import { BuyCurrencyPage } from 'pages/buy-currency-page'
 import { SettingsPage } from 'pages/settings-page'
 
-export const router = createBrowserRouter([
+export const unauthRouter = createBrowserRouter([
   {
     path: '/new',
     element: <MainPage />,
@@ -33,12 +32,31 @@ export const router = createBrowserRouter([
     element: <SignupPage />,
   },
   {
+    path: '*',
+    element: <MainPage />,
+  },
+])
+
+export const router = createBrowserRouter([
+  {
+    path: '/new',
+    element: <ProfilePage />,
+  },
+  {
+    path: '/',
+    element: <ProfilePage />,
+  },
+  {
+    path: '/login',
+    element: <ProfilePage />,
+  },
+  {
+    path: '/signup',
+    element: <ProfilePage />,
+  },
+  {
     path: '/profile',
-    element: (
-      <WithMenuComponent>
-        <ProfilePage />
-      </WithMenuComponent>
-    ),
+    element: <ProfilePage />,
   },
   {
     path: '/settings',

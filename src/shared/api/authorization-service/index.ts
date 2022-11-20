@@ -1,6 +1,12 @@
-import { IUserModel } from 'shared/model'
 import { fetchAPI } from '../network'
 
+export interface User {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  image: string
+}
 export interface UserSignupApi {
   email: string
   firstName: string
@@ -14,20 +20,23 @@ export interface UserLoginApi {
 }
 
 export interface AuthorizationService {
-  signup(data: UserSignupApi): Promise<IUserModel>
-  login(data: UserLoginApi): Promise<IUserModel>
+  signup(data: UserSignupApi): Promise<User>
+  login(data: UserLoginApi): Promise<User>
   logout(): Promise<void>
 }
 
 export class _AuthorizationServiceImpl implements AuthorizationService {
-  signup(data: UserSignupApi): Promise<IUserModel> {
+  signup(data: UserSignupApi): Promise<User> {
     return fetchAPI.post('/auth/signup', data)
   }
-  login(data: UserLoginApi): Promise<IUserModel> {
+  login(data: UserLoginApi): Promise<User> {
     return fetchAPI.post('/auth/login', data)
   }
   logout(): Promise<void> {
     return fetchAPI.post('/auth/logout', {})
+  }
+  getUser(): Promise<User> {
+    return fetchAPI.get('/user/get', {})
   }
 }
 

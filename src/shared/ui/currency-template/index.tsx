@@ -10,6 +10,7 @@ interface CurrencyTemplateProps {
   leftTop?: string | JSX.Element
   leftBottom?: string | JSX.Element
   containerClass?: string
+  onClick?: () => void
 }
 
 export const CurrencyTemplate: React.FC<CurrencyTemplateProps> = ({
@@ -19,11 +20,16 @@ export const CurrencyTemplate: React.FC<CurrencyTemplateProps> = ({
   leftTop,
   leftBottom,
   containerClass,
+  onClick,
 }) => {
   return (
     <div className={classNames(s.Request, containerClass)}>
-      <span className={s.icon}>{icon}</span>
-      <span className={s.rightTop}>{rightTop}</span>
+      <span className={s.icon} onClick={onClick}>
+        {icon}
+      </span>
+      <span className={s.rightTop} onClick={onClick}>
+        {rightTop}
+      </span>
       <span className={s.rightBottom}>{rightBottom}</span>
       <span className={s.leftTop}>{leftTop}</span>
       <span className={s.leftBottom}>{leftBottom}</span>

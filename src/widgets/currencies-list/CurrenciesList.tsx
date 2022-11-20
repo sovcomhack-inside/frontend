@@ -9,7 +9,7 @@ import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { WithNamePage } from 'shared/pages/with-name-page'
 
 import s from './currencies-list.scss'
-import { CurrencyListModel } from './model/CurrencyListModel'
+import { CurrencyModel } from './model/CurrencyListModel'
 
 export const CurrenciesList = observer(() => {
   return (
@@ -22,12 +22,10 @@ export const CurrenciesList = observer(() => {
               <FilterCurrency popupClass={s.FilterPopup} />
             </div>
             <div className={s.List}>
-              {CurrencyListModel.data &&
-                CurrencyListModel.data.map((curr) => (
-                  <Currency currency={curr} />
-                ))}
-              {CurrencyListModel.data &&
-                CurrencyListModel.status === FetchStatuses.fetch && (
+              {CurrencyModel.list &&
+                CurrencyModel.list.map((curr) => <Currency currency={curr} />)}
+              {CurrencyModel.list &&
+                CurrencyModel.status === FetchStatuses.fetch && (
                   <span color={'red'}>'Загрузка'</span>
                 )}
             </div>

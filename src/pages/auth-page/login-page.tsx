@@ -14,7 +14,12 @@ export const LoginPage = () => {
       showBackButton
       title={<MoniTitle />}
       subTitle="вход в аккаунт"
-      form={<LoginForm className={styles.LoginForm} />}
+      form={
+        <LoginForm
+          className={styles.LoginForm}
+          onButtonClick={() => navigate('/profile')}
+        />
+      }
       onBackButtonClick={onBackClick}
     />
   )

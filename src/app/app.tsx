@@ -1,13 +1,22 @@
 import classNames from 'classnames'
+import { AuthModel } from 'features/auth/model'
 import { observer } from 'mobx-react-lite'
-import { RouterProvider } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Route, RouterProvider, Routes } from 'react-router-dom'
+import { UserModel } from 'shared/model'
 import { NotificationService } from 'shared/model/NotificationService'
-import { router } from './router'
+import { router, unauthRouter } from './router'
 import s from './ui/app.module.scss'
+
 export const App = observer(() => {
+  useEffect(() => {
+    AuthModel.getUser()
+  }, [])
+  const routerProvider = UserModel.id ? router : unauthRouter
   return (
     <div className="app">
-      <RouterProvider router={router} />
+      <RouterProvider router={routerProvider} />
+      {/* {!UserModel.id && <RouterProvider router={unauthRouter} />} */}
       {NotificationService.show && (
         <div
           className={classNames(s.notify, {

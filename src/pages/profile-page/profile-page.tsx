@@ -7,25 +7,28 @@ import { UserBankAccountInfo } from 'widgets'
 import s from './profile-page.scss'
 import { ButtonsBlock } from './ui/button-block'
 import { observer } from 'mobx-react-lite'
+import { WithMenuComponent } from 'app/ui/WithMenuComponent'
 
 export const ProfilePage: React.FC = observer(() => {
   return (
-    <div className={classNames(appCss.layout, s.ProfilePage)}>
-      <div className={s.wrapper}>
-        <Link
-          to={{ pathname: '/accounts' }}
-          className={classNames(appCss.markedText, s.allAccounts)}
-        >
-          Все счета
-        </Link>
+    <WithMenuComponent>
+      <div className={classNames(appCss.layout, s.ProfilePage)}>
+        <div className={s.wrapper}>
+          <Link
+            to={{ pathname: '/accounts' }}
+            className={classNames(appCss.markedText, s.allAccounts)}
+          >
+            Все счета
+          </Link>
+        </div>
+        <div className={s.wrapper}>
+          <UserBankAccountInfo />
+        </div>
+        <div className={s.buttons}>
+          <ButtonsBlock />
+        </div>
+        {/* <Tabs containerClass={s.Tabs} tabs={tabs} /> */}
       </div>
-      <div className={s.wrapper}>
-        <UserBankAccountInfo />
-      </div>
-      <div className={s.buttons}>
-        <ButtonsBlock />
-      </div>
-      {/* <Tabs containerClass={s.Tabs} tabs={tabs} /> */}
-    </div>
+    </WithMenuComponent>
   )
 })

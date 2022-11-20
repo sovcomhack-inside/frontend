@@ -1,6 +1,7 @@
 import { computed, makeAutoObservable, observable } from 'mobx'
 import { AuthService } from 'shared/api/authorization-service'
-import { IUserModel, UserModel } from 'shared/model'
+import { UserModel } from 'shared/model'
+import { User } from '../api/types'
 
 class PassportModel {
   fullName: string = ''
@@ -52,7 +53,7 @@ export class _AuthModel {
   @computed get isSignUpButtonDisabled(): boolean {
     return (
       this.password === this.confirmedPassword &&
-      !this.email &&
+      !!this.email &&
       this.password.length >= 2 &&
       this.confirmedPassword.length >= 2
     )
@@ -66,7 +67,7 @@ export class _AuthModel {
   }
 
   setName = (value: string) => {
-    this.name = value.split(',')[0]
+    this.name = value
   }
 
   setEmail = (value: string) => {
@@ -85,7 +86,7 @@ export class _AuthModel {
     this.phone = value
   }
 
-  private fillData(data: IUserModel) {
+  private fillData(data: User) {
     UserModel.email = data.email
     UserModel.id = data.id
     UserModel.firstName = data.firstName
@@ -93,10 +94,10 @@ export class _AuthModel {
   }
 
   private _signup = async () => {
-    const response: IUserModel = await AuthService.signup({
+    const response: User = await AuthService.signup({
       email: this.email,
-      firstName: this.name.split(' ')[0],
-      lastName: this.name.split(' ')[1],
+      firstName: this.passport.fullName.split(' ')[0],
+      lastName: this.passport.fullName.split(' ')[1],
       password: this.password,
     })
     this.fillData(response)
@@ -108,7 +109,7 @@ export class _AuthModel {
 
   private _login = async () => {
     this.status = 'fetch'
-    const response: IUserModel = await AuthService.login({
+    const response: User = await AuthService.login({
       email: this.email,
       password: this.password,
     })
@@ -126,6 +127,15 @@ export class _AuthModel {
 
   public logout = () => {
     this._logout()
+  }
+
+  private _getUser = async () => {
+    const res = await AuthService.getUser()
+    UserModel.id = res.id
+  }
+
+  public getUser = () => {
+    this._getUser()
   }
 }
 

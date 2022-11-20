@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import React, { FormEvent } from 'react'
-import { UserModel } from 'shared/model'
 import { WhiteButton } from 'shared/ui/Button'
 import { LetterIcon, LockIcon } from 'shared/ui/Icons'
 import { WithIconInput } from 'shared/ui/Input'
@@ -15,6 +14,10 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
   const { className, ...rest } = props
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+  }
+
+  const onClick = () => {
+    AuthModel.login()
     props.onButtonClick?.()
   }
 
@@ -38,7 +41,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
         name="password"
         placeholder="Пароль"
       />
-      <WhiteButton type="wide" value="Войти" onClick={AuthModel.login} />
+      <WhiteButton type="wide" value="Войти" onClick={onClick} />
     </form>
   )
 }

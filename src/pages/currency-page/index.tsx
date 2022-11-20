@@ -7,14 +7,23 @@ import { WithBackbuttonPage } from 'shared/pages/with-backbutton-page'
 import { WithMenuComponent } from 'app/ui/WithMenuComponent'
 import { WithNamePage } from 'shared/pages/with-name-page'
 import { useNavigate, useParams } from 'react-router-dom'
+import { CurrencyModel } from 'widgets'
 
 export interface CurrencyPageProps {}
 
 export const CurrencyPage: React.FC<CurrencyPageProps> = () => {
   const nav = useNavigate()
   const params = useParams()
+  const currency = CurrencyModel.findByCode(params.id)
   const tabs = {
-    купить: <GraphTab graphTabClass={s.graphTab} />,
+    купить: (
+      <GraphTab
+        graphTabClass={s.graphTab}
+        price={currency?.price}
+        percent={currency?.percent}
+        code={params.id}
+      />
+    ),
   }
 
   return (

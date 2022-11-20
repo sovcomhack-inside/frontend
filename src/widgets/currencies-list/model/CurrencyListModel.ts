@@ -1,40 +1,50 @@
 import { computed, makeAutoObservable } from 'mobx'
-import { fetchAPI } from 'shared/api'
 import { FetchStatuses } from 'shared/model'
 import { NotificationService } from 'shared/model/NotificationService'
+import {
+  Currency,
+  CurrencyApi,
+  CurrencyData,
+  CurrencyDataApi,
+  CurrencyService,
+} from '../api/CurrencyService'
 
-export interface Currency {
-  name: string
-  code: string
-  price: number
-  percent: number
-}
-
-export interface CurrencyApi {
-  code: string
-  name: string
-  current_price: number
-  day_change_pct: number
-}
-
-class _CurrencyListModel {
+class _CurrencyModel {
   status: FetchStatuses = FetchStatuses.idle
-  _data: Currency[] | null = null
+  _list: Currency[] | null = null
+  _data: CurrencyData | null = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  _fetchData = async () => {
+  _fetchList = async () => {
     this.status = FetchStatuses.fetch
     try {
-      const data: CurrencyApi[] = await fetchAPI.get('/currencies/list')
+      const data: CurrencyApi[] = (await CurrencyService.getList('RUB'))
+        .currencies
       const formattedData: Currency[] = data.map((d) => ({
         price: d.current_price,
         code: d.code,
         name: d.name,
         percent: d.day_change_pct,
       }))
+      this._list = formattedData
+      this.status = FetchStatuses.idle
+    } catch (err: any) {
+      NotificationService.error(err?.message)
+    }
+  }
+
+  _fetchData = async () => {
+    this.status = FetchStatuses.fetch
+    try {
+      const data: CurrencyDataApi = await CurrencyService.getData('RUB', 15)
+
+      const formattedData: CurrencyData = {
+        code: data.code,
+        priceData: data.price_data,
+      }
       this._data = formattedData
       this.status = FetchStatuses.idle
     } catch (err: any) {
@@ -42,23 +52,33 @@ class _CurrencyListModel {
     }
   }
 
-  fetchData = () => {
-    this._fetchData()
+  fetchList = () => {
+    this._fetchList()
+  }
+
+  @computed get list() {
+    if (this._list) {
+      return this._list
+    }
+    this._fetchList()
+    return this._list
   }
 
   @computed get data() {
     if (this._data) {
-      console.log(this.status)
       return this._data
     }
-    this.fetchData()
-    console.log(this._data)
+    this._fetchData()
     return this._data
   }
 
-  findByCode = (code: string): Currency | undefined => {
-    return this.data?.find((curr) => curr.code === code)
+  findByCode = (code: string | undefined): Currency | undefined => {
+    return this.list?.find((curr) => curr.code === code)
+  }
+
+  getCurrencyData = () => {
+    return this.data
   }
 }
 
-export const CurrencyListModel = new _CurrencyListModel()
+export const CurrencyModel = new _CurrencyModel()

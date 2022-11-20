@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { action, makeAutoObservable } from 'mobx'
 
 window.addEventListener('unhandledrejection', (e) => {
   NotificationService.error(e.reason.message)
@@ -14,6 +14,7 @@ class _NotificationService {
     makeAutoObservable(this)
   }
 
+  @action
   private clear() {
     this.show = false
     this.type = null

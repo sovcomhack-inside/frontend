@@ -13,7 +13,7 @@ interface ButtonBlockProps {
 
 export const ButtonBlock: FC<ButtonBlockProps> = (props) => {
   return (
-    <div className={classNames(s.item, props.class)}>
+    <div className={classNames(s.item, props.class)} onClick={props.onClick}>
       <span className={s.title}>{props.title}</span>
       <span className={s.subTitle}>{props.subTitle}</span>
       <span className={s.icon}>{props.icon}</span>

@@ -1,13 +1,9 @@
+import { computed, makeAutoObservable, action } from 'mobx'
 import {
-  makeObservable,
-  observable,
-  computed,
-  autorun,
-  makeAutoObservable,
-  action,
-} from 'mobx'
-import { fetchAPI } from 'shared/api'
-import { NotificationService } from './NotificationService'
+  UserAccount,
+  UserAccountApi,
+  UserService,
+} from 'shared/api/UserService/UserService'
 import { FetchStatuses } from './types'
 
 type RequestStatus = 'Заявка создана' | 'В обработке'
@@ -25,57 +21,43 @@ export interface CurrencyRequest {
   status: RequestStatus
 }
 
-export interface UserAccountApi {
-  number: string
-  user_id: string
-  currency: string
-  cents: number
-  created_at: string
-}
-
-export interface IUserAccount {
-  number: string
-  userId: string
-  currency: string
-  cents: number
-  createdAt: string
-}
-
-export interface IUserModel {
-  firstName: string
-  lastName: string
-  email: string
-  id: number
-}
-
-class _UserModel implements Omit<IUserModel, 'id'> {
+class _UserModel {
   id: number | null = null
   firstName: string = ''
   lastName: string = ''
   email: string = ''
   status: FetchStatuses = FetchStatuses.idle
-  _accounts: IUserAccount[] | null = null
+  _accounts: UserAccount[] | null = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
+  private fromApiToNormal(data: any): UserAccount {
+    const account: UserAccountApi['account'] = data.account
+      ? data.account
+      : data
+    return {
+      balance: account.balance,
+      createdAt: account.created_at,
+      currency: account.currency,
+      number: account.number,
+      userId: account.user_id,
+    }
+  }
+
   private _fetchAccounts = async () => {
     this.status = FetchStatuses.fetch
-    const data: UserAccountApi[] = await fetchAPI.get('/currencies/list')
-    const formattedData: IUserAccount[] = data.map((d) => ({
-      cents: d.cents,
-      createdAt: d.created_at,
-      currency: d.currency,
-      number: d.number,
-      userId: d.user_id,
-    }))
+    const data: UserAccountApi[] | null = (await UserService.getAccounts())
+      .accounts
+    const formattedData: UserAccount[] =
+      data?.map((d) => this.fromApiToNormal(d)) ?? []
     this._accounts = formattedData
     this.status = FetchStatuses.idle
   }
 
   @computed
-  get accounts(): IUserAccount[] | null {
+  get accounts(): UserAccount[] | null {
     if (this._accounts) {
       return this._accounts
     }
@@ -83,8 +65,17 @@ class _UserModel implements Omit<IUserModel, 'id'> {
     return this._accounts
   }
 
-  @action
-  public remove = () => {}
+  getAccountByCode = (code: string | undefined) => {
+    if (!code) return undefined
+    return this.accounts?.find((acc) => acc.currency === code)
+  }
+
+  public createAccount = async (code: string) => {
+    const newAcc: UserAccountApi = await UserService.createAccount({
+      currency: code,
+    })
+    this._accounts?.push(this.fromApiToNormal(newAcc))
+  }
 }
 
 export const UserModel = new _UserModel()
